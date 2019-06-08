@@ -1,0 +1,19 @@
+[
+    {
+        "model": "transdb.transdb",
+        "fields": {
+            "gender": "Male",
+            "age": "45",
+            "educationalQualification": "12th pass",
+            "created_at": "2018-02-14 00:00:00",
+            "monthlyIncome": "40000",
+            "maritialStatus": "Single",
+            "differentlyAbled": "No",
+            "homeState": "Uttar Pradesh",
+            "nameOfDistrict": "Roorkee",
+            "landmark": "Hawa Mahal",
+            "pincode": "221717",
+            "principalSourceofIncome": "Government Sources"
+        }
+    }
+]
