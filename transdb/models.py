@@ -31,7 +31,7 @@ class Member(models.Model):
 		verbose_name_plural = "Members"
 
 	def __str__(self):
-		return self.memberID
+		return str(self.memberID)
 	
 	def get_absolute_url(self):
          """
@@ -42,6 +42,8 @@ class Member(models.Model):
 class Trip(models.Model):
 	tripID = models.AutoField(primary_key=True)
 	memberID = models.ForeignKey(Member, on_delete=models.CASCADE)
+	def __str__(self):
+		return str(self.tripID)
 
 	class Meta:
 		verbose_name_plural = "Trips"
