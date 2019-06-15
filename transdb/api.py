@@ -61,7 +61,7 @@ class OriginDestinationViewSet(viewsets.ModelViewSet):
     serializer_class = OriginDestinationSerializer
 
     def create(self, request, *args, **kwargs):
-        serializer = OriginDestination(data=request.data)
+        serializer = OriginDestinationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
