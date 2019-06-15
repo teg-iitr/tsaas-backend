@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'transport.wsgi.application'
 DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'transportdb',
+    'NAME': 'transdb',
 	'USER': 'admin',
 	'PASSWORD': 'transport05',
 	'HOST': 'localhost',
