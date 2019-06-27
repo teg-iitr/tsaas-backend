@@ -1,6 +1,6 @@
 from transdb.models import Family, Member, Trip, OriginDestination, Mode
 from rest_framework import viewsets, permissions, status
-from .serializers import FamilySerializer, MemberSerializer, TripSerializer, OriginDestinationSerializer, ModeSerializer
+from .serializers import FamilySerializer, MemberSerializer, TripSerializer, OriginDestinationSerializer, ModeSerializer,ViewAllSerializer
 from rest_framework.response import Response
 
 # TransDB viewset
@@ -11,16 +11,17 @@ class FamilyViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = FamilySerializer
 
-    def list(self, request, *args, **kwargs):
+    def create(self, request, *args, **kwargs):
         try:
             family_id = Family.objects.all().last().familyID+1
         except:
             family_id = 1
         data = {'familyID':family_id}
-        serializer = FamilySerializer(data=data)
+        serializer = FamilySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(data)
+            return Response(data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # def list(self, request, *args, **kwargs):
         # return Response({'something': 'my custom JSON'})
@@ -74,3 +75,10 @@ class ModeViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = ModeSerializer
+
+class ViewAllViewSet(viewsets.ModelViewSet):
+    queryset = Family.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ViewAllSerializer

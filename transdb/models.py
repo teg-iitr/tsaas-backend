@@ -7,6 +7,10 @@ from datetime import datetime
 
 class Family(models.Model):
 	familyID = models.AutoField(primary_key=True)
+	noOfCars = models.IntegerField(default=0)
+	noOfCycles = models.IntegerField(default=0)
+	noOfTwoWheelers = models.IntegerField(default=0)
+	familyIncome = models.CharField(max_length=100, null=True, blank=True)
 
 	class Meta:
 		verbose_name_plural = "Families"
@@ -26,6 +30,9 @@ class Member(models.Model):
 	landmark = models.CharField(max_length=200, null=True, blank=True)
 	pincode = models.CharField(max_length=100, null=True, blank=True)	
 	principalSourceofIncome = models.CharField(max_length=300, null=True, blank=True)
+	lat = models.CharField(max_length=100, blank=True, null=True)
+	lng = models.CharField(max_length=100, blank=True, null=True)
+	tripsMade = models.CharField(max_length=100, blank=True, null=True)
 
 	class Meta:
 		verbose_name_plural = "Members"

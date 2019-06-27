@@ -26,4 +26,15 @@ class OriginDestinationSerializer(serializers.ModelSerializer):
 class ModeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mode
-        fields = '__all__'        
+        fields = '__all__'
+
+class ViewAllSerializer(serializers.ModelSerializer):
+    # Family = FamilySerializer(read_only=True)
+    familyID = serializers.RelatedField(read_only=True, many=True)
+    # Trip = TripSerializer(read_only=True)
+    # OriginDestination = OriginDestinationSerializer(read_only=True)
+    # Mode = ModeSerializer(read_only=True)
+
+    class Meta:
+        model = Family
+        fields = '__all__'
