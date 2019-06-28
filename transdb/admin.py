@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Family, Member, Trip, OriginDestination, Mode
+from .models import Family, Member, Trip, OriginDestination, Mode, CollegeList
 
 class TransDBAdmin(admin.ModelAdmin):
     pass
@@ -9,6 +9,7 @@ class TransDBAdmin(admin.ModelAdmin):
 class FamilyDBAdmin(admin.ModelAdmin):
     pass
 
+admin.site.register(CollegeList)
 admin.site.register(Family)
 admin.site.register(Member)
 admin.site.register(Trip)

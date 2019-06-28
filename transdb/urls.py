@@ -1,9 +1,12 @@
 from django.urls import path
 from . import views
 from rest_framework import routers
-from .api import FamilyViewSet, MemberViewSet, TripViewSet, OriginDestinationViewSet, ModeViewSet, ViewAllViewSet
+from .api import FamilyViewSet, MemberViewSet, TripViewSet, OriginDestinationViewSet, ModeViewSet, ViewAllViewSet, CollegeListViewSet
+
 
 router = routers.DefaultRouter()
+
+router.register('api/college', CollegeListViewSet,'college' )
 
 router.register('api/family', FamilyViewSet,'family' )
 

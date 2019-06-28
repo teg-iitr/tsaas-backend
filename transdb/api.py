@@ -1,9 +1,30 @@
-from transdb.models import Family, Member, Trip, OriginDestination, Mode
+from transdb.models import Family, Member, Trip, OriginDestination, Mode, CollegeList
 from rest_framework import viewsets, permissions, status
-from .serializers import FamilySerializer, MemberSerializer, TripSerializer, OriginDestinationSerializer, ModeSerializer,ViewAllSerializer
+from .serializers import FamilySerializer, MemberSerializer, TripSerializer, OriginDestinationSerializer, ModeSerializer, ViewAllSerializer, CollegeListSerializer
 from rest_framework.response import Response
 
+
 # TransDB viewset
+
+class CollegeListViewSet(viewsets.ModelViewSet):
+    queryset = CollegeList.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = CollegeListSerializer
+
+    # def create(self, request, *args, **kwargs):
+        # try:
+        #     college_id = CollegeList.objects.all().last().collegeID+1
+        # except:
+        #     college_id = 1
+        # serializer = CollegeListSerializer(data=request.data)
+        # if serializer.is_valid():
+            # serializer.save()
+            # return Response(request.data, status=status.HTTP_201_CREATED)
+
+
+
 class FamilyViewSet(viewsets.ModelViewSet):
     queryset = Family.objects.all()
     permission_classes = [

@@ -1,7 +1,12 @@
 from rest_framework import serializers
-from transdb.models import Family, Member, Trip, OriginDestination, Mode
+from transdb.models import Family, Member, Trip, OriginDestination, Mode, CollegeList
 
 # For converting JSON data to models
+
+class CollegeListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CollegeList
+        fields = '__all__'
 
 class FamilySerializer(serializers.ModelSerializer):
     class Meta:

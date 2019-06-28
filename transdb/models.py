@@ -5,7 +5,21 @@ from datetime import datetime
 
 # Create your models here.
 
+class CollegeList(models.Model):
+	collegeID = models.AutoField(primary_key=True)
+	collegeName = models.CharField(max_length=100, default="")
+	collegeURL = models.SlugField(unique=True)
+
+	class Meta:
+		app_label = "transdb"
+		verbose_name_plural = "College List"
+
+	def __str__(self):
+		return str(self.collegeName)
+
+
 class Family(models.Model):
+	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE)
 	familyID = models.AutoField(primary_key=True)
 	noOfCars = models.IntegerField(default=0)
 	noOfCycles = models.IntegerField(default=0)
@@ -13,7 +27,12 @@ class Family(models.Model):
 	familyIncome = models.CharField(max_length=100, null=True, blank=True)
 
 	class Meta:
+		app_label = "transdb"
 		verbose_name_plural = "Families"
+
+	def __str__(self):
+		return str(self.memberID)
+
 
 class Member(models.Model):
 	memberID = models.AutoField(primary_key=True)
@@ -35,11 +54,12 @@ class Member(models.Model):
 	tripsMade = models.CharField(max_length=100, blank=True, null=True)
 
 	class Meta:
+		app_label = "transdb"
 		verbose_name_plural = "Members"
 
 	def __str__(self):
 		return str(self.memberID)
-	
+
 	def get_absolute_url(self):
          """
          Returns the url to access a particular instance of Product.
@@ -53,6 +73,7 @@ class Trip(models.Model):
 		return str(self.tripID)
 
 	class Meta:
+		app_label = "transdb"
 		verbose_name_plural = "Trips"
 
 class OriginDestination(models.Model):
@@ -66,6 +87,7 @@ class OriginDestination(models.Model):
 	destinationPlace = models.CharField(max_length=100, null=True, blank=True)
 
 	class Meta:
+		app_label = "transdb"
 		verbose_name_plural = "Origin Destination"
 
 
@@ -80,6 +102,7 @@ class Mode(models.Model):
 	travelTime = models.CharField(max_length=100, null=True, blank=True)
 
 	class Meta:
+		app_label = "transdb"
 		verbose_name_plural = "Mode Type"
 
 	def __str__(self):

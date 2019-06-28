@@ -1,9 +1,13 @@
 from django.shortcuts import render
 
 # Create your views here.
-from transdb.models import Family, Member, Trip, OriginDestination, Mode
-from transdb.serializers import FamilySerializer, MemberSerializer, TripSerializer, OriginDestinationSerializer, ModeSerializer
+from transdb.models import Family, Member, Trip, OriginDestination, Mode, CollegeList
+from transdb.serializers import FamilySerializer, MemberSerializer, TripSerializer, OriginDestinationSerializer, ModeSerializer, CollegeListSerializer
 from rest_framework import viewsets
+
+class CollegeListCreate(viewsets.ModelViewSet):
+    queryset = CollegeList.objects.all()
+    serializer_class = CollegeListSerializer
 
 class FamilyListCreate(viewsets.ModelViewSet):
     queryset = Family.objects.all()
