@@ -97,9 +97,9 @@ class ModeViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ModeSerializer
 
-class ViewAllViewSet(viewsets.ModelViewSet):
-    queryset = Family.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = ViewAllSerializer
+
+class ViewAllViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = CollegeList.objects.all()
+        serializer = ViewAllSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)

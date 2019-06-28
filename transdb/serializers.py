@@ -33,13 +33,101 @@ class ModeSerializer(serializers.ModelSerializer):
         model = Mode
         fields = '__all__'
 
-class ViewAllSerializer(serializers.ModelSerializer):
-    # Family = FamilySerializer(read_only=True)
-    familyID = serializers.RelatedField(read_only=True, many=True)
-    # Trip = TripSerializer(read_only=True)
-    # OriginDestination = OriginDestinationSerializer(read_only=True)
-    # Mode = ModeSerializer(read_only=True)
+class TripModeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Mode
+        fields = (
+            'modeID',
+            'modeType',
+            'accessMode',
+            'cost',
+            'fare',
+            'travelDistance',
+            'travelTime'
+        )
+
+class TripODSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OriginDestination
+        fields = (
+            'originDestinationID',
+            'originPlace',
+            'originLat',
+            'originLng',
+            'destinationPlace',
+            'destinationLat',
+            'destinationLng',
+        )
+
+class TripODModeSerializer(serializers.ModelSerializer):
+    origin_destination = TripODSerializer(many=True)
+    mode_types = TripModeSerializer(many=True)
+
+    class Meta:
+        model = Trip
+        fields = (
+            'tripID',
+            'origin_destination',
+            'mode_types',
+        )
+
+
+class MemberTripSerializer(serializers.ModelSerializer):
+    trips = TripODModeSerializer(many=True)
+
+    class Meta:
+        model = Member
+        fields = (
+            'memberID',
+            'created_at',
+            'gender',
+            'age',
+            'educationalQualification',
+            'monthlyIncome',
+            'maritialStatus',
+            'differentlyAbled',
+            'homeState',
+            'nameOfDistrict',
+            'landmark',
+            'pincode',
+            'principalSourceofIncome',
+            'lat',
+            'lng',
+            'tripsMade',
+            'trips'
+        )
+
+
+class FamilyMemberSerializer(serializers.ModelSerializer):
+    members = MemberTripSerializer(many = True)
 
     class Meta:
         model = Family
-        fields = '__all__'
+        fields = (
+            'familyID',
+            'noOfCars',
+            'noOfCycles',
+            'noOfTwoWheelers',
+            'familyIncome',
+            'members',
+        )
+
+class ViewAllSerializer(serializers.ModelSerializer):
+    # College = CollegeListSerializer()
+    # college = serializers.PrimaryKeyRelatedField(
+    #     queryset=Family.objects.all(),
+    #     many=True,
+    # )
+    families = FamilyMemberSerializer(many=True)
+    # Member = MemberSerializer(many=True)
+    # Trip = TripSerializer(many=True)
+    # OriginDestination = OriginDestinationSerializer(many=True)
+    # Mode = ModeSerializer(many=True)
+
+    class Meta:
+        model = CollegeList
+        fields = (
+            'collegeName',
+            'families'
+            )
+        # fields = '__all__'

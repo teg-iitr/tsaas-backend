@@ -19,7 +19,7 @@ class CollegeList(models.Model):
 
 
 class Family(models.Model):
-	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE)
+	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE, related_name='families')
 	familyID = models.AutoField(primary_key=True)
 	noOfCars = models.IntegerField(default=0)
 	noOfCycles = models.IntegerField(default=0)
@@ -30,13 +30,13 @@ class Family(models.Model):
 		app_label = "transdb"
 		verbose_name_plural = "Families"
 
-	def __str__(self):
-		return str(self.memberID)
+	# def __str__(self):
+		# return str(self.memberID)
 
 
 class Member(models.Model):
 	memberID = models.AutoField(primary_key=True)
-	familyID = models.ForeignKey(Family, blank=True, null=True, on_delete=models.CASCADE)
+	familyID = models.ForeignKey(Family, blank=True, null=True, on_delete=models.CASCADE, related_name='members')
 	created_at = models.DateTimeField(default=timezone.now)
 	gender = models.CharField(max_length=100, null=True, blank=True)
 	age = models.CharField(max_length=100, null=True, blank=True)
@@ -68,7 +68,7 @@ class Member(models.Model):
 
 class Trip(models.Model):
 	tripID = models.AutoField(primary_key=True)
-	memberID = models.ForeignKey(Member, on_delete=models.CASCADE)
+	memberID = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='trips')
 	def __str__(self):
 		return str(self.tripID)
 
@@ -77,7 +77,7 @@ class Trip(models.Model):
 		verbose_name_plural = "Trips"
 
 class OriginDestination(models.Model):
-	tripID = models.ForeignKey(Trip, on_delete=models.CASCADE)
+	tripID = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='origin_destination')
 	originDestinationID = models.AutoField(primary_key=True)
 	originLat = models.CharField(max_length=100, null=True, blank=True)
 	originLng = models.CharField(max_length=100, null=True, blank=True)
@@ -92,7 +92,7 @@ class OriginDestination(models.Model):
 
 
 class Mode(models.Model):
-	tripID = models.ForeignKey(Trip, on_delete=models.CASCADE)
+	tripID = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='mode_types')
 	modeID = models.AutoField(primary_key=True)
 	modeType = models.CharField(max_length=100, null=True, blank=True)
 	accessMode = models.CharField(max_length=100, null=True, blank=True)
