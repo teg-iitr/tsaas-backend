@@ -25,6 +25,12 @@ class Family(models.Model):
 	noOfCycles = models.IntegerField(default=0)
 	noOfTwoWheelers = models.IntegerField(default=0)
 	familyIncome = models.CharField(max_length=100, null=True, blank=True)
+	homeState = models.CharField(max_length=100, null=True, blank=True)
+	landmark = models.CharField(max_length=200, null=True, blank=True)
+	pincode = models.CharField(max_length=100, null=True, blank=True)	
+	lat = models.CharField(max_length=100, blank=True, null=True)
+	lng = models.CharField(max_length=100, blank=True, null=True)
+	nameOfDistrict = models.CharField(max_length=100, null=True, blank=True)
 
 	class Meta:
 		app_label = "transdb"
@@ -44,13 +50,7 @@ class Member(models.Model):
 	monthlyIncome = models.CharField(max_length=100, null=True, blank=True)
 	maritialStatus = models.CharField(max_length=100, null=True, blank=True)
 	differentlyAbled = models.CharField(max_length=100, null=True, blank=True)
-	homeState = models.CharField(max_length=100, null=True, blank=True)
-	nameOfDistrict = models.CharField(max_length=100, null=True, blank=True)
-	landmark = models.CharField(max_length=200, null=True, blank=True)
-	pincode = models.CharField(max_length=100, null=True, blank=True)	
 	principalSourceofIncome = models.CharField(max_length=300, null=True, blank=True)
-	lat = models.CharField(max_length=100, blank=True, null=True)
-	lng = models.CharField(max_length=100, blank=True, null=True)
 	tripsMade = models.CharField(max_length=100, blank=True, null=True)
 
 	class Meta:

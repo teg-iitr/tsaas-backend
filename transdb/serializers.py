@@ -1,5 +1,15 @@
 from rest_framework import serializers
-from transdb.models import Family, Member, Trip, OriginDestination, Mode, CollegeList
+from transdb.models import (
+    Family,
+    Member,
+    Trip,
+    OriginDestination,
+    Mode,
+    CollegeList
+    )
+
+from django.db.models import Q
+from django.contrib.auth import get_user_model
 
 # For converting JSON data to models
 
@@ -86,13 +96,7 @@ class MemberTripSerializer(serializers.ModelSerializer):
             'monthlyIncome',
             'maritialStatus',
             'differentlyAbled',
-            'homeState',
-            'nameOfDistrict',
-            'landmark',
-            'pincode',
             'principalSourceofIncome',
-            'lat',
-            'lng',
             'tripsMade',
             'trips'
         )
@@ -109,20 +113,18 @@ class FamilyMemberSerializer(serializers.ModelSerializer):
             'noOfCycles',
             'noOfTwoWheelers',
             'familyIncome',
+            'homeState',
+            'pincode',
+            'nameOfDistrict',
+            'landmark',
+            'lat',
+            'lng',
             'members',
         )
 
 class ViewAllSerializer(serializers.ModelSerializer):
-    # College = CollegeListSerializer()
-    # college = serializers.PrimaryKeyRelatedField(
-    #     queryset=Family.objects.all(),
-    #     many=True,
-    # )
     families = FamilyMemberSerializer(many=True)
-    # Member = MemberSerializer(many=True)
-    # Trip = TripSerializer(many=True)
-    # OriginDestination = OriginDestinationSerializer(many=True)
-    # Mode = ModeSerializer(many=True)
+
 
     class Meta:
         model = CollegeList
@@ -130,4 +132,3 @@ class ViewAllSerializer(serializers.ModelSerializer):
             'collegeName',
             'families'
             )
-        # fields = '__all__'
