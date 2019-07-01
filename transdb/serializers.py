@@ -113,6 +113,7 @@ class FamilyMemberSerializer(serializers.ModelSerializer):
             'noOfCycles',
             'noOfTwoWheelers',
             'familyIncome',
+            'country',
             'homeState',
             'pincode',
             'nameOfDistrict',

@@ -16,6 +16,9 @@ class CollegeList(models.Model):
 
 	def __str__(self):
 		return str(self.collegeName)
+	def get_absolute_url(self):
+		print (reverse(kwargs={'slug': self.collegeURL}))
+		return reverse(kwargs={'slug': self.collegeURL})
 
 
 class Family(models.Model):
@@ -25,6 +28,7 @@ class Family(models.Model):
 	noOfCycles = models.IntegerField(default=0)
 	noOfTwoWheelers = models.IntegerField(default=0)
 	familyIncome = models.CharField(max_length=100, null=True, blank=True)
+	country = models.CharField(max_length=100, null=True, blank=True)
 	homeState = models.CharField(max_length=100, null=True, blank=True)
 	landmark = models.CharField(max_length=200, null=True, blank=True)
 	pincode = models.CharField(max_length=100, null=True, blank=True)	

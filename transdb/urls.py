@@ -3,22 +3,21 @@ from . import views
 from rest_framework import routers
 from .api import FamilyViewSet, MemberViewSet, TripViewSet, OriginDestinationViewSet, ModeViewSet, ViewAllViewSet, CollegeListViewSet
 
-
 router = routers.DefaultRouter()
 
-router.register('api/college', CollegeListViewSet,'college' )
+router.register('college', CollegeListViewSet,'college' )
 
-router.register('api/family', FamilyViewSet,'family' )
+router.register('family', FamilyViewSet,'family' )
 
-router.register('api/members', MemberViewSet,'member' )
+router.register('members', MemberViewSet,'member' )
 
-router.register('api/trips', TripViewSet,'trip' )
+router.register('trips', TripViewSet,'trip' )
 
-router.register('api/od', OriginDestinationViewSet,'originDestination' )
+router.register('od', OriginDestinationViewSet,'originDestination' )
 
-router.register('api/mode', ModeViewSet,'mode' )
+router.register('mode', ModeViewSet,'mode' )
 
-router.register('api/all', ViewAllViewSet,'all' )
+router.register('all', ViewAllViewSet,'all' )
 
 
 urlpatterns = router.urls
