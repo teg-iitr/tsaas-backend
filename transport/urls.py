@@ -13,12 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# from django.views.decorators.csrf import csrf_exempt
+# @csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from django.conf import settings
+
+react_routes = getattr(settings, 'REACT_ROUTES', [])
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('transdb.urls')),
     path('',views.ReactAppView.as_view()),
     path('<slug:slug>',views.ReactAppView.as_view()),
 ]
+for route in react_routes:
+    urlpatterns += [
+        path('{}'.format(route),views.ReactAppView.as_view())
+    ]

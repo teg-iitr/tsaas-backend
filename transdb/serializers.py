@@ -5,7 +5,8 @@ from transdb.models import (
     Trip,
     OriginDestination,
     Mode,
-    CollegeList
+    CollegeList,
+    Feedback
     )
 
 from django.db.models import Q
@@ -43,6 +44,11 @@ class ModeSerializer(serializers.ModelSerializer):
         model = Mode
         fields = '__all__'
 
+class FeedbackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feedback
+        fields = '__all__'
+
 class TripModeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mode
@@ -50,7 +56,6 @@ class TripModeSerializer(serializers.ModelSerializer):
             'modeID',
             'modeType',
             'accessMode',
-            'cost',
             'fare',
             'travelDistance',
             'travelTime'
@@ -61,9 +66,11 @@ class TripODSerializer(serializers.ModelSerializer):
         model = OriginDestination
         fields = (
             'originDestinationID',
+            'originLandmark',
             'originPlace',
             'originLat',
             'originLng',
+            'destinationLandmark',
             'destinationPlace',
             'destinationLat',
             'destinationLng',
@@ -97,7 +104,13 @@ class MemberTripSerializer(serializers.ModelSerializer):
             'maritialStatus',
             'differentlyAbled',
             'principalSourceofIncome',
-            'tripsMade',
+            'stayAtHome',
+            'householdHead',
+            'respondent',
+            'twoWheelerLicense',
+            'simCards',
+            'fourWheelerLicense',
+            'dataWhileDriving',
             'trips'
         )
 
@@ -115,7 +128,6 @@ class FamilyMemberSerializer(serializers.ModelSerializer):
             'familyIncome',
             'country',
             'homeState',
-            'pincode',
             'nameOfDistrict',
             'landmark',
             'lat',

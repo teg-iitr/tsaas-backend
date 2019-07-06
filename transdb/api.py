@@ -4,7 +4,8 @@ from transdb.models import (
     Trip,
     OriginDestination,
     Mode,
-    CollegeList
+    CollegeList,
+    Feedback
     )
 from rest_framework import viewsets, permissions, status
 from .serializers import (
@@ -14,11 +15,12 @@ from .serializers import (
     OriginDestinationSerializer,
     ModeSerializer,
     ViewAllSerializer,
-    CollegeListSerializer
+    CollegeListSerializer,
+    FeedbackSerializer
     )
 from rest_framework.response import Response
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+# from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAdminUser
 
 # TransDB viewset
 
@@ -41,7 +43,7 @@ class FamilyViewSet(viewsets.ViewSet):
         permissions.AllowAny
     ]
     serializer_class = FamilySerializer
-
+    
     def create(self, request, *args, **kwargs):
         try:
             family_id = Family.objects.all().last().familyID+1
@@ -82,7 +84,7 @@ class TripViewSet(viewsets.ViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class OriginDestinationViewSet(viewsets.ModelViewSet):
+class OriginDestinationViewSet(viewsets.ViewSet):
     queryset = OriginDestination.objects.all()
     permission_classes = [
         permissions.AllowAny
@@ -111,14 +113,29 @@ class ModeViewSet(viewsets.ViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class FeedbackViewSet(viewsets.ViewSet):
+    queryset = Feedback.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = FeedbackSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = FeedbackSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class ViewAllViewSet(viewsets.ViewSet):
     # authentication_classes = [SessionAuthentication, BasicAuthentication]
 
     # permission_classes = [IsAuthenticated, IsAdminUser]
-    # permission_classes = [IsAuthenticated, IsAdminUser]
-    permission_classes = [
-        permissions.AllowAny
-    ]
+    permission_classes = [permissions.AllowAny]
+    # permission_classes = [IsAdminUser]
+
     def list(self, request):
         queryset = CollegeList.objects.all()
         serializer = ViewAllSerializer(queryset, many=True)

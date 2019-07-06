@@ -16,9 +16,8 @@ class CollegeList(models.Model):
 
 	def __str__(self):
 		return str(self.collegeName)
-	def get_absolute_url(self):
-		print (reverse(kwargs={'slug': self.collegeURL}))
-		return reverse(kwargs={'slug': self.collegeURL})
+	# def get_absolute_url(self):
+	# 	return reverse(kwargs={'slug': self.collegeURL})
 
 
 class Family(models.Model):
@@ -31,7 +30,6 @@ class Family(models.Model):
 	country = models.CharField(max_length=100, null=True, blank=True)
 	homeState = models.CharField(max_length=100, null=True, blank=True)
 	landmark = models.CharField(max_length=200, null=True, blank=True)
-	pincode = models.CharField(max_length=100, null=True, blank=True)	
 	lat = models.CharField(max_length=100, blank=True, null=True)
 	lng = models.CharField(max_length=100, blank=True, null=True)
 	nameOfDistrict = models.CharField(max_length=100, null=True, blank=True)
@@ -55,8 +53,14 @@ class Member(models.Model):
 	maritialStatus = models.CharField(max_length=100, null=True, blank=True)
 	differentlyAbled = models.CharField(max_length=100, null=True, blank=True)
 	principalSourceofIncome = models.CharField(max_length=300, null=True, blank=True)
-	tripsMade = models.CharField(max_length=100, blank=True, null=True)
-
+	stayAtHome = models.CharField(max_length=100, blank=True, null=True)
+	householdHead = models.CharField(max_length=100, blank=True, null=True)
+	respondent = models.CharField(max_length=100, blank=True, null=True)
+	twoWheelerLicense = models.CharField(max_length=100, blank=True, null=True)
+	simCards = models.CharField(max_length=100, blank=True, null=True)
+	fourWheelerLicense = models.CharField(max_length=100, blank=True, null=True)
+	dataWhileDriving = models.CharField(max_length=100, blank=True, null=True)
+	
 	class Meta:
 		app_label = "transdb"
 		verbose_name_plural = "Members"
@@ -83,9 +87,11 @@ class Trip(models.Model):
 class OriginDestination(models.Model):
 	tripID = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='origin_destination')
 	originDestinationID = models.AutoField(primary_key=True)
+	originLandmark = models.CharField(max_length=100, null=True, blank=True)
 	originLat = models.CharField(max_length=100, null=True, blank=True)
 	originLng = models.CharField(max_length=100, null=True, blank=True)
 	originPlace = models.CharField(max_length=100, null=True, blank=True)
+	destinationLandmark = models.CharField(max_length=100, null=True, blank=True)
 	destinationLat = models.CharField(max_length=100, null=True, blank=True)
 	destinationLng = models.CharField(max_length=100, null=True, blank=True)
 	destinationPlace = models.CharField(max_length=100, null=True, blank=True)
@@ -100,7 +106,6 @@ class Mode(models.Model):
 	modeID = models.AutoField(primary_key=True)
 	modeType = models.CharField(max_length=100, null=True, blank=True)
 	accessMode = models.CharField(max_length=100, null=True, blank=True)
-	cost = models.CharField(max_length=100, null=True, blank=True)
 	fare = models.CharField(max_length=100, null=True, blank=True)
 	travelDistance = models.CharField(max_length=100, null=True, blank=True)
 	travelTime = models.CharField(max_length=100, null=True, blank=True)
@@ -111,3 +116,11 @@ class Mode(models.Model):
 
 	def __str__(self):
 		return self.modeType+' : '+self.accessMode
+
+class Feedback(models.Model):
+	feedback = models.TextField(blank=True, null=True)
+	feedback_time = models.DateTimeField(default=timezone.now)
+
+	class Meta:
+		app_label = "transdb"
+		verbose_name_plural = "Feedbacks"
