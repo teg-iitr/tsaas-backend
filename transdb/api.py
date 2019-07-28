@@ -133,8 +133,8 @@ class ViewAllViewSet(viewsets.ViewSet):
     # authentication_classes = [SessionAuthentication, BasicAuthentication]
 
     # permission_classes = [IsAuthenticated, IsAdminUser]
-    permission_classes = [permissions.AllowAny]
-    # permission_classes = [IsAdminUser]
+    # permission_classes = [permissions.AllowAny]
+    permission_classes = [IsAdminUser]
 
     def list(self, request):
         queryset = CollegeList.objects.all()
