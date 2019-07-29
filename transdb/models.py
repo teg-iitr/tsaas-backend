@@ -60,7 +60,9 @@ class Member(models.Model):
 	simCards = models.CharField(max_length=100, blank=True, null=True)
 	fourWheelerLicense = models.CharField(max_length=100, blank=True, null=True)
 	dataWhileDriving = models.CharField(max_length=100, blank=True, null=True)
-	
+	bluetooth = models.CharField(max_length=100, blank=True, null=True)
+	wifi = models.CharField(max_length=100, blank=True, null=True)
+
 	class Meta:
 		app_label = "transdb"
 		verbose_name_plural = "Members"

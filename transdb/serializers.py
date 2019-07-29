@@ -111,6 +111,8 @@ class MemberTripSerializer(serializers.ModelSerializer):
             'simCards',
             'fourWheelerLicense',
             'dataWhileDriving',
+            'bluetooth',
+            'wifi',
             'trips'
         )
 
