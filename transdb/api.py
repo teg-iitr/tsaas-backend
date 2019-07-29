@@ -114,19 +114,12 @@ class ModeViewSet(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class FeedbackViewSet(viewsets.ViewSet):
+class FeedbackViewSet(viewsets.ModelViewSet):
     queryset = Feedback.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = FeedbackSerializer
+    # permission_classes = [permissions.AllowAny]
+    permission_classes = [IsAdminUser]
 
-    def create(self, request, *args, **kwargs):
-        serializer = FeedbackSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    serializer_class = FeedbackSerializer
 
 
 class ViewAllViewSet(viewsets.ViewSet):
