@@ -97,6 +97,10 @@ class OriginDestination(models.Model):
 	destinationLat = models.CharField(max_length=100, null=True, blank=True)
 	destinationLng = models.CharField(max_length=100, null=True, blank=True)
 	destinationPlace = models.CharField(max_length=100, null=True, blank=True)
+	fare = models.CharField(max_length=100, null=True, blank=True)
+	travelDistance = models.CharField(max_length=100, null=True, blank=True)
+	travelTime = models.CharField(max_length=100, null=True, blank=True)
+
 
 	class Meta:
 		app_label = "transdb"
@@ -106,18 +110,19 @@ class OriginDestination(models.Model):
 class Mode(models.Model):
 	tripID = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='mode_types')
 	modeID = models.AutoField(primary_key=True)
-	modeType = models.CharField(max_length=100, null=True, blank=True)
-	accessMode = models.CharField(max_length=100, null=True, blank=True)
-	fare = models.CharField(max_length=100, null=True, blank=True)
-	travelDistance = models.CharField(max_length=100, null=True, blank=True)
-	travelTime = models.CharField(max_length=100, null=True, blank=True)
+	# modeType = models.CharField(max_length=100, null=True, blank=True)
+	modeName = models.CharField(max_length=100, null=True, blank=True)
+	# fare = models.CharField(max_length=100, null=True, blank=True)
+	# travelDistance = models.CharField(max_length=100, null=True, blank=True)
+	# travelTime = models.CharField(max_length=100, null=True, blank=True)
 
 	class Meta:
 		app_label = "transdb"
 		verbose_name_plural = "Mode Type"
+		# abstract = True
 
-	def __str__(self):
-		return self.modeType+' : '+self.accessMode
+	# def __str__(self):
+	# 	return self.modeType+' : '+self.accessMode
 
 class Feedback(models.Model):
 	feedback = models.TextField(blank=True, null=True)

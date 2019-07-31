@@ -54,11 +54,7 @@ class TripModeSerializer(serializers.ModelSerializer):
         model = Mode
         fields = (
             'modeID',
-            'modeType',
-            'accessMode',
-            'fare',
-            'travelDistance',
-            'travelTime'
+            'modeName',
         )
 
 class TripODSerializer(serializers.ModelSerializer):
@@ -74,6 +70,9 @@ class TripODSerializer(serializers.ModelSerializer):
             'destinationPlace',
             'destinationLat',
             'destinationLng',
+            'fare',
+            'travelDistance',
+            'travelTime'
         )
 
 class TripODModeSerializer(serializers.ModelSerializer):

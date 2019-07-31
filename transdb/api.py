@@ -20,16 +20,12 @@ from .serializers import (
     )
 from rest_framework.response import Response
 # from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, AllowAny
 
 # TransDB viewset
 
 class CollegeListViewSet(viewsets.ViewSet):
-    queryset = CollegeList.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = CollegeListSerializer
+    permission_classes = [AllowAny]
 
     def list(self, request, *args, **kwargs):
         queryset = CollegeList.objects.all()
@@ -38,11 +34,7 @@ class CollegeListViewSet(viewsets.ViewSet):
 
 
 class FamilyViewSet(viewsets.ViewSet):
-    queryset = Family.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = FamilySerializer
+    permission_classes = [AllowAny]
     
     def create(self, request, *args, **kwargs):
         try:
@@ -57,11 +49,7 @@ class FamilyViewSet(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class MemberViewSet(viewsets.ViewSet):
-    queryset = Member.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = MemberSerializer
+    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = MemberSerializer(data=request.data)
@@ -71,11 +59,7 @@ class MemberViewSet(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class TripViewSet(viewsets.ViewSet):
-    queryset = Trip.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = TripSerializer
+    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = TripSerializer(data=request.data)
@@ -85,11 +69,7 @@ class TripViewSet(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class OriginDestinationViewSet(viewsets.ViewSet):
-    queryset = OriginDestination.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = OriginDestinationSerializer
+    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = OriginDestinationSerializer(data=request.data)
@@ -100,11 +80,7 @@ class OriginDestinationViewSet(viewsets.ViewSet):
 
 
 class ModeViewSet(viewsets.ViewSet):
-    queryset = Mode.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = ModeSerializer
+    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         serializer = ModeSerializer(data=request.data)
@@ -114,19 +90,22 @@ class ModeViewSet(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class FeedbackViewSet(viewsets.ModelViewSet):
-    queryset = Feedback.objects.all()
-    # permission_classes = [permissions.AllowAny]
-    permission_classes = [IsAdminUser]
-
-    serializer_class = FeedbackSerializer
+class FeedbackViewSet(viewsets.ViewSet):
+    permission_classes = [AllowAny]
+    
+    def create(self, request, *args, **kwargs):
+        serializer = FeedbackSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ViewAllViewSet(viewsets.ViewSet):
     # authentication_classes = [SessionAuthentication, BasicAuthentication]
 
     # permission_classes = [IsAuthenticated, IsAdminUser]
-    # permission_classes = [permissions.AllowAny]
+    # permission_classes = [AllowAny]
     permission_classes = [IsAdminUser]
 
     def list(self, request):
