@@ -55,6 +55,7 @@ class TripModeSerializer(serializers.ModelSerializer):
         fields = (
             'modeID',
             'modeName',
+            'modeIndex',
         )
 
 class TripODSerializer(serializers.ModelSerializer):

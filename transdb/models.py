@@ -112,6 +112,7 @@ class Mode(models.Model):
 	modeID = models.AutoField(primary_key=True)
 	# modeType = models.CharField(max_length=100, null=True, blank=True)
 	modeName = models.CharField(max_length=100, null=True, blank=True)
+	modeIndex = models.CharField(max_length=100, null=True, blank=True)
 	# fare = models.CharField(max_length=100, null=True, blank=True)
 	# travelDistance = models.CharField(max_length=100, null=True, blank=True)
 	# travelTime = models.CharField(max_length=100, null=True, blank=True)
