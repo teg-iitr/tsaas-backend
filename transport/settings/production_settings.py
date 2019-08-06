@@ -10,6 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+"""
+This a temp settings file.
+You should create your own local_settings.py file. 
+You can use this file as a guide to create your 
+own local_settings file.
+
+We have written some instructions on how to do this.
+Look for comments starting with --->
+"""
+
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -20,11 +30,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
+# ---> YOU MUST EDIT THIS SECRET KEY. YOU COULD USE ENVIRONMENT VARIABLES
+#      TO STORE THIS SECRET KEY
 SECRET_KEY = 'gpmb%%4(+856tru7qgq8-$8!v-*)t&_zt=s%&zx2vphrh##9s-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# ---> ENTER THE ADDRESS OF THE HOST/DOMAIN NAME THAT DJANGO SHOULD SERVE
+#        (e.g. 'www.example.com') '*' WILL ALLOW ANYONE TO MAKE A GET/POST REQUEST
 ALLOWED_HOSTS = ['*']
 
 
@@ -77,17 +92,33 @@ WSGI_APPLICATION = 'transport.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+
+# ---> WE ARE USING POSTGRES AS RECOMMENDED BY DJANGO.
+#      
 DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'transdb',
-	'USER': 'admin',
-	'PASSWORD': 'transport05',
+    'NAME': 'name_of_database', # ---> REPLACE THIS WITH THE NAME OF YOUR OWN DATABASE
+	'USER': 'dummy_username', # ---> REPLACE THIS WITH THE USERNAME YOU CREATE IN PSQL
+	'PASSWORD': 'dummy_password', # ---> REPLACE THIS WITH THE PASSWORD YOU CREATE IN PSQL
 	'HOST': 'localhost',
 	'PORT': '',
     }
 }
 
+# ---> YOU CAN USE SQLITE IF YOU WANT TO. THIS IS NOT RECOMMENDEND.
+#        JUST UNCOMMENT THE CODE BELOW
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+#         'NAME': 'sqlite3.db',                      # Or path to database file if using sqlite3.
+#         'USER': '',                      # Not used with sqlite3.
+#         'PASSWORD': '',                  # Not used with sqlite3.
+#         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+#         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -138,3 +169,11 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+# ---> SET ABOVE TO FALSE AND ADD A TUPLE CONTAINING WEBSITES THAT SHOULD BE ALLOWED
+
+# CORS_ORIGIN_ALLOW_ALL = False
+
+# CORS_ORIGIN_WHITELIST = (
+#     'http//:localhost:8000',
+# )
