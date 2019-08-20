@@ -27,6 +27,9 @@ urlpatterns = [
     path('api/', include('transdb.urls')),
     path('',views.ReactAppView.as_view()),
     path('<slug:slug>',views.ReactAppView.as_view()),
+    path('favicon.ico',views.FaviconView.as_view()),
+    path('manifest.json',views.ManifestView.as_view()),
+    path('service-worker.js',views.ServiceWorkerView.as_view()),
 ]
 for route in react_routes:
     urlpatterns += [
