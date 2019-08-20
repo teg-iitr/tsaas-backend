@@ -16,13 +16,51 @@ from .serializers import (
     ModeSerializer,
     ViewAllSerializer,
     CollegeListSerializer,
-    FeedbackSerializer
+    FeedbackSerializer,
+    SurveyListSerializer,
+    SurveyStartTimeSerializer,
+    SurveyEndTimeSerializer,
     )
 from rest_framework.response import Response
 # from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAdminUser, AllowAny
 
 # TransDB viewset
+
+class SurveyListViewSet(viewsets.ViewSet):
+    permission_classes = [AllowAny]
+    def create(self, request, *args, **kwargs):
+        try:
+            survey_id = SurveyListSerializer.objects.all().last().surveyID+1
+        except:
+            survey_id = 1
+        data = {'surveyID':survey_id}
+        serializer = SurveyListSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SurveyStartTimeViewSet(viewsets.ViewSet):
+    permission_classes = [AllowAny]
+    def create(self, request, *args, **kwargs):
+        serializer = SurveyStartTimeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SurveyEndTimeViewSet(viewsets.ViewSet):
+    permission_classes = [AllowAny]
+    def create(self, request, *args, **kwargs):
+        serializer = SurveyEndTimeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class CollegeListViewSet(viewsets.ViewSet):
     permission_classes = [AllowAny]

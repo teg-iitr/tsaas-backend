@@ -6,13 +6,31 @@ from transdb.models import (
     OriginDestination,
     Mode,
     CollegeList,
-    Feedback
+    Feedback,
+    SurveyList,
+    SurveyStartTime,
+    SurveyEndTime
     )
 
 from django.db.models import Q
 from django.contrib.auth import get_user_model
 
 # For converting JSON data to models
+
+class SurveyListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SurveyList
+        fields = '__all__'
+
+class SurveyStartTimeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SurveyStartTime
+        fields = '__all__'
+
+class SurveyEndTimeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SurveyEndTime
+        fields = '__all__'
 
 class CollegeListSerializer(serializers.ModelSerializer):
     class Meta:

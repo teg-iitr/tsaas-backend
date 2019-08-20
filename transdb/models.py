@@ -5,6 +5,18 @@ from datetime import datetime
 
 # Create your models here.
 
+class SurveyList(models.Model):
+	surveyID = models.IntegerField(primary_key=True)
+	surveyType = models.CharField(max_length=100, null=True, blank=True)
+
+class SurveyStartTime(models.Model):
+	surveyStartTimeID = models.IntegerField(primary_key=True)
+	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyStartTime')
+
+class SurveyEndTime(models.Model):
+	surveyEndTimeID = models.IntegerField(primary_key=True)
+	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyEndTime')
+
 class CollegeList(models.Model):
 	collegeID = models.AutoField(primary_key=True)
 	collegeName = models.CharField(max_length=100, default="")

@@ -8,7 +8,10 @@ from .models import (
     OriginDestination,
     Mode,
     CollegeList,
-    Feedback
+    Feedback,
+    SurveyList,
+    SurveyStartTime,
+    SurveyEndTime,
     )
 
 class TransDBAdmin(admin.ModelAdmin):
@@ -17,6 +20,9 @@ class TransDBAdmin(admin.ModelAdmin):
 class FamilyDBAdmin(admin.ModelAdmin):
     pass
 
+admin.site.register(SurveyList)
+admin.site.register(SurveyStartTime)
+admin.site.register(SurveyEndTime)
 admin.site.register(CollegeList)
 admin.site.register(Family)
 admin.site.register(Member)

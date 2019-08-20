@@ -9,10 +9,19 @@ from .api import (
     ModeViewSet,
     ViewAllViewSet,
     CollegeListViewSet,
-    FeedbackViewSet
+    FeedbackViewSet,
+    SurveyListViewSet,
+    SurveyStartTimeViewSet,
+    SurveyEndTimeViewSet
     )
 
 router = routers.DefaultRouter()
+
+router.register('survey', SurveyListViewSet,'survey' )
+
+router.register('surveyStart', SurveyStartTimeViewSet,'surveyStartTime' )
+
+router.register('surveyEnd', SurveyEndTimeViewSet,'surveyEndTime' )
 
 router.register('college', CollegeListViewSet,'college' )
 
