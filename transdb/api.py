@@ -7,8 +7,8 @@ from transdb.models import (
     CollegeList,
     Feedback,
     SurveyList,
-    SurveyStartTime,
-    SurveyEndTime
+    ResponseTime,
+    SurveyType
     )
 from rest_framework import viewsets, permissions, status
 from .serializers import (
@@ -22,6 +22,7 @@ from .serializers import (
     FeedbackSerializer,
     SurveyListSerializer,
     ResponseTimeSerializer,
+    TypeSerialiazer
     )
 from rest_framework.response import Response
 # from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -31,6 +32,15 @@ from rest_framework import generics, mixins, views
 
 
 # TransDB viewset
+
+class SurveyTypeViewSet(viewsets.ViewSet):
+    permission_classes = [AllowAny]
+
+    def list(self, request, *args, **kwargs):
+        queryset = SurveyType.objects.all()
+        serializer = TypeSerialiazer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 class SurveyListViewSet(viewsets.ViewSet):
     permission_classes = [AllowAny]

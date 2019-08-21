@@ -9,12 +9,18 @@ from transdb.models import (
     Feedback,
     SurveyList,
     ResponseTime,
+    SurveyType
     )
 
 from django.db.models import Q
 from django.contrib.auth import get_user_model
 
 # For converting JSON data to models
+
+class TypeSerialiazer(serializers.ModelSerializer):
+    class Meta:
+        model = SurveyType
+        fields = '__all__'
 
 class SurveyListSerializer(serializers.ModelSerializer):
     class Meta:

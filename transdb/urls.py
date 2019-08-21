@@ -18,6 +18,8 @@ router = routers.DefaultRouter()
 
 router.register('survey', SurveyListViewSet,'survey' )
 
+router.register('surveyType', SurveyListViewSet,'type' )
+
 router.register('responseTime', ResponseTimeViewSet,'surveyResponseTime' )
 
 router.register('college', CollegeListViewSet,'college' )
