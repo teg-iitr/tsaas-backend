@@ -21,8 +21,7 @@ from .serializers import (
     CollegeListSerializer,
     FeedbackSerializer,
     SurveyListSerializer,
-    SurveyStartTimeSerializer,
-    SurveyEndTimeSerializer,
+    ResponseTimeSerializer,
     )
 from rest_framework.response import Response
 # from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -48,16 +47,9 @@ class SurveyListViewSet(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class SurveyStartTimeViewSet(viewsets.ModelViewSet):
-    queryset = SurveyStartTime.objects.all()
-    serializer_class = SurveyStartTimeSerializer
-    http_method_names = ['update', 'create', 'head', 'put', 'patch', 'options']
-    permission_classes = [AllowAny]
-
-
-class SurveyEndTimeViewSet(viewsets.ModelViewSet):
-    queryset = SurveyEndTime.objects.all()
-    serializer_class = SurveyEndTimeSerializer
+class ResponseTimeViewSet(viewsets.ModelViewSet):
+    queryset = ResponseTime.objects.all()
+    serializer_class = ResponseTimeSerializer
     http_method_names = ['update', 'create', 'head', 'put', 'patch', 'options']
     permission_classes = [AllowAny]
 

@@ -11,17 +11,14 @@ from .api import (
     CollegeListViewSet,
     FeedbackViewSet,
     SurveyListViewSet,
-    SurveyStartTimeViewSet,
-    SurveyEndTimeViewSet
+    ResponseTimeViewSet
     )
 
 router = routers.DefaultRouter()
 
 router.register('survey', SurveyListViewSet,'survey' )
 
-router.register('surveyStart', SurveyStartTimeViewSet,'surveyStartTime' )
-
-router.register('surveyEnd', SurveyEndTimeViewSet,'surveyEndTime' )
+router.register('responseTime', ResponseTimeViewSet,'surveyResponseTime' )
 
 router.register('college', CollegeListViewSet,'college' )
 

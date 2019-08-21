@@ -8,8 +8,7 @@ from transdb.models import (
     CollegeList,
     Feedback,
     SurveyList,
-    SurveyStartTime,
-    SurveyEndTime
+    ResponseTime,
     )
 
 from django.db.models import Q
@@ -22,14 +21,9 @@ class SurveyListSerializer(serializers.ModelSerializer):
         model = SurveyList
         fields = '__all__'
 
-class SurveyStartTimeSerializer(serializers.ModelSerializer):
+class ResponseTimeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SurveyStartTime
-        fields = '__all__'
-
-class SurveyEndTimeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SurveyEndTime
+        model = ResponseTime
         fields = '__all__'
 
 class CollegeListSerializer(serializers.ModelSerializer):

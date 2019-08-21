@@ -8,19 +8,24 @@ from django.db.models.signals import post_save
 
 def create_surveyStartTimeAndSurveyEndTime(sender, **kwargs): 
 	if kwargs.get('created', False): 
-		SurveyStartTime.objects.get_or_create(
+		ResponseTime.objects.get_or_create(
 			surveyID=kwargs.get('instance'),
-			surveyStartTimeID=kwargs.get('instance').surveyID
+			responseTimeID=kwargs.get('instance').surveyID
 		)
-		SurveyEndTime.objects.get_or_create(
-			surveyID=kwargs.get('instance'),
-			surveyEndTimeID=kwargs.get('instance').surveyID
-		)
+
+class SurveyType(models.Model):
+	surveyTypeID = models.AutoField(primary_key=True)
+	surveyType = models.CharField(max_length=100, null=True, blank=True)
+	
+	class Meta:
+		app_label = "transdb"
+		verbose_name_plural = "SurveyType"
 
 
 class SurveyList(models.Model):
 	surveyID = models.AutoField(primary_key=True)
 	surveyType = models.CharField(max_length=100, null=True, blank=True)
+
 	class Meta:
 		app_label = "transdb"
 		verbose_name_plural = "SurveyList"
@@ -29,26 +34,21 @@ class SurveyList(models.Model):
 post_save.connect(create_surveyStartTimeAndSurveyEndTime, sender=SurveyList)
 
 
-class SurveyStartTime(models.Model):
-	surveyStartTimeID = models.IntegerField(primary_key=True)
+class ResponseTime(models.Model):
+	responseTimeID = models.IntegerField(primary_key=True)
 	surveyStartTime = models.CharField(max_length=100, null=True, blank=True)
-	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyStartTime')
+	SurveyEndTime = models.CharField(max_length=100, null=True, blank=True)
+	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyResponseTime')
+
 	class Meta:
 		app_label = "transdb"
 		verbose_name_plural = "SurveyStartTimes"
-
-class SurveyEndTime(models.Model):
-	surveyEndTime = models.CharField(max_length=100, null=True, blank=True)
-	surveyEndTimeID = models.IntegerField(primary_key=True)
-	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyEndTime')
-	class Meta:
-		app_label = "transdb"
-		verbose_name_plural = "SurveyEndTimes"
 
 class CollegeList(models.Model):
 	collegeID = models.AutoField(primary_key=True)
 	collegeName = models.CharField(max_length=100, default="")
 	collegeURL = models.SlugField(unique=True)
+	surveyTypeID = models.ForeignKey(SurveyType, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyType')
 
 	class Meta:
 		app_label = "transdb"
@@ -61,6 +61,7 @@ class CollegeList(models.Model):
 
 
 class Family(models.Model):
+	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='survey')
 	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE, related_name='families')
 	familyID = models.AutoField(primary_key=True)
 	noOfCars = models.IntegerField(default=0)
