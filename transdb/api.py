@@ -28,6 +28,9 @@ from rest_framework.response import Response
 # from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAdminUser, AllowAny
 
+from rest_framework import generics, mixins, views
+
+
 # TransDB viewset
 
 class SurveyListViewSet(viewsets.ViewSet):
@@ -45,17 +48,20 @@ class SurveyListViewSet(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class SurveyStartTimeViewSet(viewsets.ViewSet):
+class SurveyStartTimeViewSet(viewsets.ModelViewSet):
+    queryset = SurveyStartTime.objects.all()
+    serializer_class = SurveyStartTimeSerializer
+    http_method_names = ['update', 'create', 'head']
     permission_classes = [AllowAny]
-    def create(self, request, *args, **kwargs):
-        serializer = SurveyStartTimeSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    # def create(self, request, *args, **kwargs):
+        # serializer = SurveyStartTimeSerializer(data=request.data)
+        # if serializer.is_valid():
+            # serializer.save()
+            # return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class SurveyEndTimeViewSet(viewsets.ViewSet):
+class SurveyEndTimeViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
     def create(self, request, *args, **kwargs):
         serializer = SurveyEndTimeSerializer(data=request.data)
