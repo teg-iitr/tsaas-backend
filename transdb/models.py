@@ -21,6 +21,9 @@ def create_surveyStartTimeAndSurveyEndTime(sender, **kwargs):
 class SurveyList(models.Model):
 	surveyID = models.AutoField(primary_key=True)
 	surveyType = models.CharField(max_length=100, null=True, blank=True)
+	class Meta:
+		app_label = "transdb"
+		verbose_name_plural = "SurveyList"
 
 
 post_save.connect(create_surveyStartTimeAndSurveyEndTime, sender=SurveyList)
@@ -29,12 +32,16 @@ post_save.connect(create_surveyStartTimeAndSurveyEndTime, sender=SurveyList)
 class SurveyStartTime(models.Model):
 	surveyStartTimeID = models.IntegerField(primary_key=True)
 	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyStartTime')
-
+	class Meta:
+		app_label = "transdb"
+		verbose_name_plural = "SurveyStartTimes"
 
 class SurveyEndTime(models.Model):
 	surveyEndTimeID = models.IntegerField(primary_key=True)
 	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyEndTime')
-
+	class Meta:
+		app_label = "transdb"
+		verbose_name_plural = "SurveyEndTimes"
 
 class CollegeList(models.Model):
 	collegeID = models.AutoField(primary_key=True)
