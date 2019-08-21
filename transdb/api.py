@@ -53,22 +53,13 @@ class SurveyStartTimeViewSet(viewsets.ModelViewSet):
     serializer_class = SurveyStartTimeSerializer
     http_method_names = ['update', 'create', 'head']
     permission_classes = [AllowAny]
-    # def create(self, request, *args, **kwargs):
-        # serializer = SurveyStartTimeSerializer(data=request.data)
-        # if serializer.is_valid():
-            # serializer.save()
-            # return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class SurveyEndTimeViewSet(viewsets.ModelViewSet):
+    queryset = SurveyEndTime.objects.all()
+    serializer_class = SurveyEndTimeSerializer
+    http_method_names = ['update', 'create', 'head']
     permission_classes = [AllowAny]
-    def create(self, request, *args, **kwargs):
-        serializer = SurveyEndTimeSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CollegeListViewSet(viewsets.ViewSet):
