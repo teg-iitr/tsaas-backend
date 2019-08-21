@@ -51,14 +51,14 @@ class SurveyListViewSet(viewsets.ViewSet):
 class SurveyStartTimeViewSet(viewsets.ModelViewSet):
     queryset = SurveyStartTime.objects.all()
     serializer_class = SurveyStartTimeSerializer
-    http_method_names = ['update', 'create', 'head']
+    http_method_names = ['update', 'create', 'head', 'put', 'patch', 'options']
     permission_classes = [AllowAny]
 
 
 class SurveyEndTimeViewSet(viewsets.ModelViewSet):
     queryset = SurveyEndTime.objects.all()
     serializer_class = SurveyEndTimeSerializer
-    http_method_names = ['update', 'create', 'head']
+    http_method_names = ['update', 'create', 'head', 'put', 'patch', 'options']
     permission_classes = [AllowAny]
 
 

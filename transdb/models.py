@@ -31,12 +31,14 @@ post_save.connect(create_surveyStartTimeAndSurveyEndTime, sender=SurveyList)
 
 class SurveyStartTime(models.Model):
 	surveyStartTimeID = models.IntegerField(primary_key=True)
+	surveyStartTime = models.CharField(max_length=100, null=True, blank=True)
 	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyStartTime')
 	class Meta:
 		app_label = "transdb"
 		verbose_name_plural = "SurveyStartTimes"
 
 class SurveyEndTime(models.Model):
+	surveyEndTime = models.CharField(max_length=100, null=True, blank=True)
 	surveyEndTimeID = models.IntegerField(primary_key=True)
 	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyEndTime')
 	class Meta:
