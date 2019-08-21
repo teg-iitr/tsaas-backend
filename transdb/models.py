@@ -1,21 +1,40 @@
 from django.db import models
 from django.utils import timezone
 from datetime import datetime
+from django.db.models.signals import post_save
 
 
 # Create your models here.
 
+def create_surveyStartTimeAndSurveyEndTime(sender, **kwargs): 
+	if kwargs.get('created', False): 
+		SurveyStartTime.objects.get_or_create(
+			surveyID=kwargs.get('instance'),
+			surveyStartTimeID=kwargs.get('instance').surveyID
+		)
+		SurveyEndTime.objects.get_or_create(
+			surveyID=kwargs.get('instance'),
+			surveyEndTimeID=kwargs.get('instance').surveyID
+		)
+
+
 class SurveyList(models.Model):
-	surveyID = models.IntegerField(primary_key=True)
+	surveyID = models.AutoField(primary_key=True)
 	surveyType = models.CharField(max_length=100, null=True, blank=True)
+
+
+post_save.connect(create_surveyStartTimeAndSurveyEndTime, sender=SurveyList)
+
 
 class SurveyStartTime(models.Model):
 	surveyStartTimeID = models.IntegerField(primary_key=True)
 	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyStartTime')
 
+
 class SurveyEndTime(models.Model):
 	surveyEndTimeID = models.IntegerField(primary_key=True)
 	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyEndTime')
+
 
 class CollegeList(models.Model):
 	collegeID = models.AutoField(primary_key=True)
@@ -24,7 +43,7 @@ class CollegeList(models.Model):
 
 	class Meta:
 		app_label = "transdb"
-		verbose_name_plural = "College List"
+		verbose_name_plural = "CollegeList"
 
 	def __str__(self):
 		return str(self.collegeName)
@@ -116,7 +135,7 @@ class OriginDestination(models.Model):
 
 	class Meta:
 		app_label = "transdb"
-		verbose_name_plural = "Origin Destination"
+		verbose_name_plural = "OriginDestinations"
 
 
 class Mode(models.Model):
@@ -131,7 +150,7 @@ class Mode(models.Model):
 
 	class Meta:
 		app_label = "transdb"
-		verbose_name_plural = "Mode Type"
+		verbose_name_plural = "ModeTypes"
 		# abstract = True
 
 	# def __str__(self):

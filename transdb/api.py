@@ -5,7 +5,10 @@ from transdb.models import (
     OriginDestination,
     Mode,
     CollegeList,
-    Feedback
+    Feedback,
+    SurveyList,
+    SurveyStartTime,
+    SurveyEndTime
     )
 from rest_framework import viewsets, permissions, status
 from .serializers import (
@@ -31,8 +34,8 @@ class SurveyListViewSet(viewsets.ViewSet):
     permission_classes = [AllowAny]
     def create(self, request, *args, **kwargs):
         try:
-            survey_id = SurveyListSerializer.objects.all().last().surveyID+1
-        except:
+            survey_id = SurveyList.objects.all().last().surveyID+1
+        except Exception as e:
             survey_id = 1
         data = {'surveyID':survey_id}
         serializer = SurveyListSerializer(data=request.data)
