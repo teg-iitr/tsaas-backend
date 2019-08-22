@@ -8,7 +8,8 @@ from transdb.models import (
     Feedback,
     SurveyList,
     ResponseTime,
-    SurveyType
+    SurveyType,
+    PtSurvey
     )
 from rest_framework import viewsets, permissions, status
 from .serializers import (
@@ -22,7 +23,8 @@ from .serializers import (
     FeedbackSerializer,
     SurveyListSerializer,
     ResponseTimeSerializer,
-    TypeSerialiazer
+    TypeSerialiazer,
+    PtSurveySerializer
     )
 from rest_framework.response import Response
 # from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -152,3 +154,18 @@ class ViewAllViewSet(viewsets.ViewSet):
         queryset = CollegeList.objects.all()
         serializer = ViewAllSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class PtSurveyViewSet(viewsets.ViewSet):
+    permission_classes = [AllowAny]
+    
+    def create(self, request, *args, **kwargs):
+        try:
+            person_id = PtSurvey.objects.all().last().personID+1
+        except:
+            person_id = 1
+        data = {'personID':person_id}
+        serializer = PtSurveySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

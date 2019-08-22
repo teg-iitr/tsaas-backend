@@ -174,3 +174,23 @@ class Feedback(models.Model):
 	class Meta:
 		app_label = "transdb"
 		verbose_name_plural = "Feedbacks"
+
+
+class PtSurvey(models.Model):
+	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='ptsurveys')
+	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE, related_name='colleges')
+	personID = models.AutoField(primary_key=True)
+	noOfCars = models.IntegerField(default=0)
+	noOfCycles = models.IntegerField(default=0)
+	noOfTwoWheelers = models.IntegerField(default=0)
+	familyIncome = models.CharField(max_length=100, null=True, blank=True)
+	country = models.CharField(max_length=100, null=True, blank=True)
+	homeState = models.CharField(max_length=100, null=True, blank=True)
+	landmark = models.CharField(max_length=200, null=True, blank=True)
+	lat = models.CharField(max_length=100, blank=True, null=True)
+	lng = models.CharField(max_length=100, blank=True, null=True)
+	nameOfDistrict = models.CharField(max_length=100, null=True, blank=True)
+
+	class Meta:
+		app_label = "transdb"
+		verbose_name_plural = "PTSurveys"

@@ -11,7 +11,8 @@ from .models import (
     Feedback,
     SurveyList,
     ResponseTime,
-    SurveyType
+    SurveyType,
+    PtSurvey
     )
 
 class TransDBAdmin(admin.ModelAdmin):
@@ -20,7 +21,6 @@ class TransDBAdmin(admin.ModelAdmin):
 class FamilyDBAdmin(admin.ModelAdmin):
     pass
 
-admin.site.register(SurveyType)
 admin.site.register(SurveyList)
 admin.site.register(ResponseTime)
 admin.site.register(CollegeList)
@@ -30,3 +30,4 @@ admin.site.register(Trip)
 admin.site.register(OriginDestination)
 admin.site.register(Mode)
 admin.site.register(Feedback)
+admin.site.register(PtSurvey)

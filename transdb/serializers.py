@@ -9,7 +9,8 @@ from transdb.models import (
     Feedback,
     SurveyList,
     ResponseTime,
-    SurveyType
+    SurveyType,
+    PtSurvey
     )
 
 from django.db.models import Q
@@ -165,3 +166,21 @@ class ViewAllSerializer(serializers.ModelSerializer):
             'collegeName',
             'families'
             )
+
+class PtSurveySerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = PtSurvey
+        fields = (
+            'personID',
+            'noOfCars',
+            'noOfCycles',
+            'noOfTwoWheelers',
+            'familyIncome',
+            'country',
+            'homeState',
+            'nameOfDistrict',
+            'landmark',
+            'lat',
+            'lng',
+        )
