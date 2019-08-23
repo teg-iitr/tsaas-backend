@@ -62,7 +62,7 @@ class CollegeList(models.Model):
 
 
 class Family(models.Model):
-	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='survey')
+	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='hhs_surveys')
 	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE, related_name='families')
 	familyID = models.AutoField(primary_key=True)
 	noOfCars = models.IntegerField(default=0)
@@ -177,8 +177,8 @@ class Feedback(models.Model):
 
 
 class PtSurvey(models.Model):
-	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='ptsurveys')
-	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE, related_name='colleges')
+	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='pt_surveys')
+	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE, related_name='respondents')
 	personID = models.AutoField(primary_key=True)
 	noOfCars = models.IntegerField(default=0)
 	noOfCycles = models.IntegerField(default=0)
