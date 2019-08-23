@@ -22,6 +22,7 @@ class FamilyDBAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(SurveyList)
+admin.site.register(SurveyType)
 admin.site.register(ResponseTime)
 admin.site.register(CollegeList)
 admin.site.register(Family)
