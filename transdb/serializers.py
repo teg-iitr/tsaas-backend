@@ -173,14 +173,12 @@ class PtSurveySerializer(serializers.ModelSerializer):
         model = PtSurvey
         fields = (
             'personID',
+            'age',
+            'gender',
+            'educationalQualification',
+            'profession',
+            'monthlyIncome',
             'noOfCars',
-            'noOfCycles',
             'noOfTwoWheelers',
-            'familyIncome',
-            'country',
-            'homeState',
-            'nameOfDistrict',
-            'landmark',
-            'lat',
-            'lng',
+            'noOfCycles',
         )

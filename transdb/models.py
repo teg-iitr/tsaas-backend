@@ -88,6 +88,7 @@ class Member(models.Model):
 	memberID = models.AutoField(primary_key=True)
 	familyID = models.ForeignKey(Family, blank=True, null=True, on_delete=models.CASCADE, related_name='members')
 	created_at = models.DateTimeField(default=timezone.now)
+	
 	gender = models.CharField(max_length=100, null=True, blank=True)
 	age = models.CharField(max_length=100, null=True, blank=True)
 	educationalQualification = models.CharField(max_length=100, null=True, blank=True)
@@ -180,16 +181,24 @@ class PtSurvey(models.Model):
 	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='pt_surveys')
 	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE, related_name='respondents')
 	personID = models.AutoField(primary_key=True)
+	
+	age = models.CharField(max_length=100, null=True, blank=True)
+	gender = models.CharField(max_length=100, null=True, blank=True)
+	educationalQualification = models.CharField(max_length=100, null=True, blank=True)
+	profession = models.CharField(max_length=300, null=True, blank=True)
+	monthlyIncome = models.CharField(max_length=100, null=True, blank=True)
 	noOfCars = models.IntegerField(default=0)
-	noOfCycles = models.IntegerField(default=0)
 	noOfTwoWheelers = models.IntegerField(default=0)
-	familyIncome = models.CharField(max_length=100, null=True, blank=True)
-	country = models.CharField(max_length=100, null=True, blank=True)
-	homeState = models.CharField(max_length=100, null=True, blank=True)
-	landmark = models.CharField(max_length=200, null=True, blank=True)
-	lat = models.CharField(max_length=100, blank=True, null=True)
-	lng = models.CharField(max_length=100, blank=True, null=True)
-	nameOfDistrict = models.CharField(max_length=100, null=True, blank=True)
+	noOfCycles = models.IntegerField(default=0)
+	
+	# travelPurpose = models.CharField(max_length=100, null=True, blank=True)
+	# fromLandmark = models.CharField(max_length=200, null=True, blank=True)
+	# toLandmark = models.CharField(max_length=200, null=True, blank=True)
+	# travelTime = models.CharField(max_length=200, null=True, blank=True)
+	# travelCost = models.CharField(max_length=200, null=True, blank=True)
+	# accesMode = models.CharField(max_length=200, null=True, blank=True)
+	# egressMode = models.CharField(max_length=200, null=True, blank=True)
+	# travelFreq = models.CharField(max_length=200, null=True, blank=True)
 
 	class Meta:
 		app_label = "transdb"
