@@ -68,6 +68,11 @@ class FeedbackSerializer(serializers.ModelSerializer):
         model = Feedback
         fields = '__all__'
 
+class PtSurveySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PtSurvey
+        fields = '__all__'
+
 class TripModeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mode
@@ -166,19 +171,3 @@ class ViewAllSerializer(serializers.ModelSerializer):
             'collegeName',
             'families'
             )
-
-class PtSurveySerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = PtSurvey
-        fields = (
-            'personID',
-            'age',
-            'gender',
-            'educationalQualification',
-            'profession',
-            'monthlyIncome',
-            'noOfCars',
-            'noOfTwoWheelers',
-            'noOfCycles',
-        )
