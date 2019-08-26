@@ -14,6 +14,7 @@ from .api import (
     ResponseTimeViewSet,
     SurveyTypeViewSet,
     PtSurveyViewSet,
+    PtSurveyRatingViewSet
     )
 
 router = routers.DefaultRouter()
@@ -48,6 +49,6 @@ router.register('all', ViewAllViewSet,'all' )
 # PT Survey
 
 router.register('ptSurvey', PtSurveyViewSet,'ptSurvey' )
-router.register('ptSurveyRating', PtSurveyViewSet,'ptSurveyRating' )
+router.register('ptSurveyRating', PtSurveyRatingViewSet,'ptSurveyRating' )
 
 urlpatterns = router.urls
