@@ -10,7 +10,7 @@ from transdb.models import (
     ResponseTime,
     SurveyType,
     PtSurvey,
-    PTSurveyRating
+    PtSurveyRating
     )
 from rest_framework import viewsets, permissions, status
 from .serializers import (

@@ -254,7 +254,7 @@ class PtSurveyRating(models.Model):
 	rsec4 = models.CharField(max_length=100, null=True, blank=True)
 
 	rover1 = models.CharField(max_length=100, null=True, blank=True)
-	rover1 = models.CharField(max_length=100, null=True, blank=True)
+	rover2 = models.CharField(max_length=100, null=True, blank=True)
 
 	class Meta:
 		app_label = "transdb"
