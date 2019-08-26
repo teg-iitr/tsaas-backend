@@ -48,5 +48,6 @@ router.register('all', ViewAllViewSet,'all' )
 # PT Survey
 
 router.register('ptSurvey', PtSurveyViewSet,'ptSurvey' )
+router.register('ptSurveyRating', PtSurveyViewSet,'ptSurveyRating' )
 
 urlpatterns = router.urls

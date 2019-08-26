@@ -9,7 +9,8 @@ from transdb.models import (
     SurveyList,
     ResponseTime,
     SurveyType,
-    PtSurvey
+    PtSurvey,
+    PTSurveyRating
     )
 from rest_framework import viewsets, permissions, status
 from .serializers import (
@@ -24,7 +25,8 @@ from .serializers import (
     SurveyListSerializer,
     ResponseTimeSerializer,
     TypeSerialiazer,
-    PtSurveySerializer
+    PtSurveySerializer,
+    PtSurveyRatingSerializer
     )
 from rest_framework.response import Response
 # from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -165,6 +167,16 @@ class PtSurveyViewSet(viewsets.ViewSet):
             person_id = 1
         data = {'personID':person_id}
         serializer = PtSurveySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class PtSurveyRatingViewSet(viewsets.ViewSet):
+    permission_classes = [AllowAny]
+    
+    def create(self, request, *args, **kwargs):
+        serializer = PtSurveyRatingSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(data, status=status.HTTP_201_CREATED)

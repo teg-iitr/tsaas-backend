@@ -10,7 +10,8 @@ from transdb.models import (
     SurveyList,
     ResponseTime,
     SurveyType,
-    PtSurvey
+    PtSurvey,
+    PtSurveyRating
     )
 
 from django.db.models import Q
@@ -72,6 +73,11 @@ class PtSurveySerializer(serializers.ModelSerializer):
     class Meta:
         model = PtSurvey
         fields = '__all__'
+
+class PtSurveyRatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PtSurveyRating
+        fields ='__all__'
 
 class TripModeSerializer(serializers.ModelSerializer):
     class Meta:

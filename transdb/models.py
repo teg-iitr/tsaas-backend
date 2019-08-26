@@ -191,15 +191,71 @@ class PtSurvey(models.Model):
 	noOfTwoWheelers = models.IntegerField(default=0)
 	noOfCycles = models.IntegerField(default=0)
 	
-	# travelPurpose = models.CharField(max_length=100, null=True, blank=True)
-	# fromLandmark = models.CharField(max_length=200, null=True, blank=True)
-	# toLandmark = models.CharField(max_length=200, null=True, blank=True)
-	# travelTime = models.CharField(max_length=200, null=True, blank=True)
-	# travelCost = models.CharField(max_length=200, null=True, blank=True)
-	# accesMode = models.CharField(max_length=200, null=True, blank=True)
-	# egressMode = models.CharField(max_length=200, null=True, blank=True)
-	# travelFreq = models.CharField(max_length=200, null=True, blank=True)
+	metro = models.CharField(max_length=100, null=True, blank=True)
+
+	travelPurpose = models.CharField(max_length=100, null=True, blank=True)
+	fromLandmark = models.CharField(max_length=200, null=True, blank=True)
+	toLandmark = models.CharField(max_length=200, null=True, blank=True)
+	travelTime = models.CharField(max_length=200, null=True, blank=True)
+	travelCost = models.CharField(max_length=200, null=True, blank=True)
+	accesMode = models.CharField(max_length=200, null=True, blank=True)
+	egressMode = models.CharField(max_length=200, null=True, blank=True)
+	travelFreq = models.CharField(max_length=200, null=True, blank=True)
 
 	class Meta:
 		app_label = "transdb"
-		verbose_name_plural = "PTSurveys"
+		verbose_name_plural = "PtSurveys"
+
+
+class PtSurveyRating(models.Model):
+	personID = models.ForeignKey(PtSurvey, blank=True, null=True, on_delete=models.CASCADE, related_name='ptPersons')
+	ptSurveyRatingId = models.AutoField(primary_key=True)
+
+	metro = models.CharField(max_length=100, null=True, blank=True)
+	
+	racc1 = models.CharField(max_length=100, null=True, blank=True)
+	racc2 = models.CharField(max_length=100, null=True, blank=True)
+	racc3 = models.CharField(max_length=100, null=True, blank=True)
+	
+	rtrav1 = models.CharField(max_length=100, null=True, blank=True)
+	rtrav2 = models.CharField(max_length=100, null=True, blank=True)
+	rtrav3 = models.CharField(max_length=100, null=True, blank=True)
+	rtrav4 = models.CharField(max_length=100, null=True, blank=True)
+	rtrav5 = models.CharField(max_length=100, null=True, blank=True)
+	rtrav6 = models.CharField(max_length=100, null=True, blank=True)
+	rtrav7 = models.CharField(max_length=100, null=True, blank=True)
+	rtrav8 = models.CharField(max_length=100, null=True, blank=True)
+
+	rmov1 = models.CharField(max_length=100, null=True, blank=True)
+	rmov2 = models.CharField(max_length=100, null=True, blank=True)
+	rmov3 = models.CharField(max_length=100, null=True, blank=True)
+	rmov4 = models.CharField(max_length=100, null=True, blank=True)
+	rmov5 = models.CharField(max_length=100, null=True, blank=True)
+	rmov6 = models.CharField(max_length=100, null=True, blank=True)
+	rmov7 = models.CharField(max_length=100, null=True, blank=True)
+	rmov8 = models.CharField(max_length=100, null=True, blank=True)
+	rmov9 = models.CharField(max_length=100, null=True, blank=True)
+	rmov10 = models.CharField(max_length=100, null=True, blank=True)
+
+	rcom1 = models.CharField(max_length=100, null=True, blank=True)
+	rcom2 = models.CharField(max_length=100, null=True, blank=True)
+	rcom3 = models.CharField(max_length=100, null=True, blank=True)
+	rcom4 = models.CharField(max_length=100, null=True, blank=True)
+	rcom5 = models.CharField(max_length=100, null=True, blank=True)
+	rcom6 = models.CharField(max_length=100, null=True, blank=True)
+	rcom7 = models.CharField(max_length=100, null=True, blank=True)
+	rcom8 = models.CharField(max_length=100, null=True, blank=True)
+	rcom9 = models.CharField(max_length=100, null=True, blank=True)
+	rcom10 = models.CharField(max_length=100, null=True, blank=True)
+
+	rsec1 = models.CharField(max_length=100, null=True, blank=True)
+	rsec2 = models.CharField(max_length=100, null=True, blank=True)
+	rsec3 = models.CharField(max_length=100, null=True, blank=True)
+	rsec4 = models.CharField(max_length=100, null=True, blank=True)
+
+	rover1 = models.CharField(max_length=100, null=True, blank=True)
+	rover1 = models.CharField(max_length=100, null=True, blank=True)
+
+	class Meta:
+		app_label = "transdb"
+		verbose_name_plural = "PtSurveyRatings"
