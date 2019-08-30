@@ -64,7 +64,7 @@ class SurveyListViewSet(viewsets.ViewSet):
 class ResponseTimeViewSet(viewsets.ModelViewSet):
     queryset = ResponseTime.objects.all()
     serializer_class = ResponseTimeSerializer
-    http_method_names = ['update', 'create', 'head', 'put', 'patch', 'options']
+    http_method_names = ['update', 'create', 'head', 'put', 'patch', 'options','post']
     permission_classes = [AllowAny]
 
 
@@ -172,12 +172,14 @@ class PtSurveyViewSet(viewsets.ViewSet):
             return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class PtSurveyRatingViewSet(viewsets.ViewSet):
+class PtSurveyRatingViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
-    
-    def create(self, request, *args, **kwargs):
-        serializer = PtSurveyRatingSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    queryset = PtSurveyRating.objects.all()
+    serializer_class = PtSurveyRatingSerializer
+    http_method_names = ['update', 'create', 'head', 'options','post']
+    # def create(self, request, *args, **kwargs):
+    #     serializer = PtSurveyRatingSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
