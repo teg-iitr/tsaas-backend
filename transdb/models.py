@@ -179,7 +179,7 @@ class Feedback(models.Model):
 
 class PtSurvey(models.Model):
 	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='pt_surveys')
-	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE, related_name='respondents')
+	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE, related_name='ptSurveys')
 	personID = models.AutoField(primary_key=True)
 	
 	age = models.CharField(max_length=100, null=True, blank=True)

@@ -33,5 +33,11 @@ urlpatterns = [
 ]
 for route in react_routes:
     urlpatterns += [
-        path('{}'.format(route),views.ReactAppView.as_view())
+        path('<slug:slug>'+'{}'.format(route),views.ReactAppView.as_view())
+    ]
+
+from transdb.models import CollegeList
+for x in CollegeList.objects.all():
+    urlpatterns += [
+        path('<slug:slug>'+'/{}/'.format(x.collegeURL),views.ReactAppView.as_view())
     ]
