@@ -183,3 +183,12 @@ class PtSurveyRatingViewSet(viewsets.ModelViewSet):
     #         serializer.save()
     #         return Response(data, status=status.HTTP_201_CREATED)
     #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ViewResponseTimeViewSet(viewsets.ViewSet):
+
+    permission_classes = [IsAdminUser]
+
+    def list(self, request):
+        queryset = ResponseTime.objects.all()
+        serializer = ResponseTimeSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)

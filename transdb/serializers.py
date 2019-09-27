@@ -174,6 +174,7 @@ class ViewAllSerializer(serializers.ModelSerializer):
     class Meta:
         model = CollegeList
         fields = (
+            'collegeURL',
             'collegeName',
             'families'
             )

@@ -14,7 +14,8 @@ from .api import (
     ResponseTimeViewSet,
     SurveyTypeViewSet,
     PtSurveyViewSet,
-    PtSurveyRatingViewSet
+    PtSurveyRatingViewSet,
+    ViewResponseTimeViewSet,
     )
 
 router = routers.DefaultRouter()
@@ -50,5 +51,10 @@ router.register('all', ViewAllViewSet,'all' )
 
 router.register('ptSurvey', PtSurveyViewSet,'ptSurvey' )
 router.register('ptSurveyRating', PtSurveyRatingViewSet,'ptSurveyRating' )
+
+
+# Survey Response Time
+
+router.register('viewSurveyResponseTime', ViewResponseTimeViewSet,'viewSurveyResponseTime' )
 
 urlpatterns = router.urls
