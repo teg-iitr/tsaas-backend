@@ -40,6 +40,7 @@ class ResponseTime(models.Model):
 	surveyStartTime = models.CharField(max_length=100, null=True, blank=True)
 	surveyEndTime = models.CharField(max_length=100, null=True, blank=True)
 	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyResponseTime')
+	
 
 	class Meta:
 		app_label = "transdb"
@@ -50,7 +51,7 @@ class CollegeList(models.Model):
 	collegeName = models.CharField(max_length=100, default="")
 	collegeURL = models.SlugField(unique=True)
 	surveyTypeID = models.ForeignKey(SurveyType, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyType')
-
+	
 	class Meta:
 		app_label = "transdb"
 		verbose_name_plural = "CollegeList"
@@ -65,6 +66,7 @@ class Family(models.Model):
 	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='hhs_surveys')
 	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE, related_name='families')
 	familyID = models.AutoField(primary_key=True)
+	noOfMembers = models.IntegerField(default=0)
 	noOfCars = models.IntegerField(default=0)
 	noOfCycles = models.IntegerField(default=0)
 	noOfTwoWheelers = models.IntegerField(default=0)

@@ -154,6 +154,7 @@ class FamilyMemberSerializer(serializers.ModelSerializer):
         model = Family
         fields = (
             'familyID',
+            'noOfMembers',
             'noOfCars',
             'noOfCycles',
             'noOfTwoWheelers',
