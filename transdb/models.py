@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from datetime import datetime
 from django.db.models.signals import post_save
+from django.db.models import Subquery, OuterRef
 
 
 # Create your models here.
@@ -50,6 +51,7 @@ class CollegeList(models.Model):
 	collegeID = models.AutoField(primary_key=True)
 	collegeName = models.CharField(max_length=100, default="")
 	collegeURL = models.SlugField(unique=True)
+	# constrainField = models.CharField(max_length=100, null=True, blank=True)
 	surveyTypeID = models.ForeignKey(SurveyType, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyType')
 	
 	class Meta:
@@ -62,11 +64,16 @@ class CollegeList(models.Model):
 	# 	return reverse(kwargs={'slug': self.collegeURL})
 
 
+def updateCurrentCount(sender, **kwargs):
+	famID = kwargs.get('instance').familyID
+	famID.currentCount += 1
+
 class Family(models.Model):
 	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='hhs_surveys')
 	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE, related_name='families')
 	familyID = models.AutoField(primary_key=True)
 	noOfMembers = models.IntegerField(default=0)
+	currentCount = models.IntegerField(default=0)
 	noOfCars = models.IntegerField(default=0)
 	noOfCycles = models.IntegerField(default=0)
 	noOfTwoWheelers = models.IntegerField(default=0)
@@ -120,6 +127,8 @@ class Member(models.Model):
          Returns the url to access a particular instance of Product.
          """
          return reverse('member-view', args=[str(self.memberID)])
+
+post_save.connect(updateCurrentCount, sender=Member)
 
 class Trip(models.Model):
 	tripID = models.AutoField(primary_key=True)
