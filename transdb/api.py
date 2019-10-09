@@ -92,6 +92,19 @@ class FamilyViewSet(viewsets.ViewSet):
             return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def get(self, request, *args, **kwargs):
+        # this_object_id = kwargs['familyID']
+        queryset = Family.objects.all()
+        serializer = FamilySerializer(queryset, many=True)
+        data = []
+        for i in serializer.data:
+            data.append({
+            'familyID':i['familyID'],
+            'currentCount':i['currentCount'],
+            'noOfMembers':i['noOfMembers'] 
+            })
+        return Response(data, status=status.HTTP_201_CREATED)
+
 class MemberViewSet(viewsets.ViewSet):
     permission_classes = [AllowAny]
 
