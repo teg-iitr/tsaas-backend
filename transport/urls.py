@@ -36,8 +36,11 @@ for route in react_routes:
         path('<slug:slug>'+'{}'.format(route),views.ReactAppView.as_view())
     ]
 
-from transdb.models import CollegeList
-for x in CollegeList.objects.all():
-    urlpatterns += [
-        path('<slug:slug>'+'/{}'.format(x.collegeURL),views.ReactAppView.as_view())
-    ]
+try:
+    from transdb.models import CollegeList
+    for x in CollegeList.objects.all():
+        urlpatterns += [
+            path('<slug:slug>'+'/{}'.format(x.collegeURL),views.ReactAppView.as_view())
+        ]
+except Exception as e:
+    print (e, "You have probably not created a collegelist database")
