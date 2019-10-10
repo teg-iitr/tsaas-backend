@@ -33,6 +33,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser, AllowAny
 
 from rest_framework import generics, mixins, views
+from django.shortcuts import get_object_or_404
 
 
 # TransDB viewset
@@ -92,18 +93,19 @@ class FamilyViewSet(viewsets.ViewSet):
             return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def get(self, request, *args, **kwargs):
+    def retrieve(self, request, pk=None):
         # this_object_id = kwargs['familyID']
         queryset = Family.objects.all()
-        serializer = FamilySerializer(queryset, many=True)
+        family = get_object_or_404(queryset, pk=pk)
+        serializer = FamilySerializer(family)
         data = []
-        for i in serializer.data:
-            data.append({
-            'familyID':i['familyID'],
-            'currentCount':i['currentCount'],
-            'noOfMembers':i['noOfMembers'] 
-            })
+        data.append({
+            'familyID':serializer.data['familyID'],
+            'currentCount':serializer.data['currentCount'],
+            'noOfMembers':serializer.data['noOfMembers'] 
+        })
         return Response(data, status=status.HTTP_201_CREATED)
+
 
 class MemberViewSet(viewsets.ViewSet):
     permission_classes = [AllowAny]
