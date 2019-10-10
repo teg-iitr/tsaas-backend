@@ -65,8 +65,9 @@ class CollegeList(models.Model):
 
 
 def updateCurrentCount(sender, **kwargs):
-	famID = kwargs.get('instance').familyID
-	famID.currentCount += 1
+	famObj = kwargs.get('instance').familyID
+	temp = famObj.currentCount + 1
+	Family.objects.filter(familyID=famObj.familyID).update(currentCount = temp)
 
 class Family(models.Model):
 	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='hhs_surveys')
