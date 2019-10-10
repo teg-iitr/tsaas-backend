@@ -103,7 +103,9 @@ class TripODSerializer(serializers.ModelSerializer):
             'destinationLng',
             'fare',
             'travelDistance',
-            'travelTime'
+            # 'travelTime'
+            'departureTime',
+            'arrivalTime'
         )
 
 class TripODModeSerializer(serializers.ModelSerializer):

@@ -51,7 +51,7 @@ class CollegeList(models.Model):
 	collegeID = models.AutoField(primary_key=True)
 	collegeName = models.CharField(max_length=100, default="")
 	collegeURL = models.SlugField(unique=True)
-	# constrainField = models.CharField(max_length=100, null=True, blank=True)
+	constrainField = models.CharField(max_length=100, null=True, blank=True)
 	surveyTypeID = models.ForeignKey(SurveyType, blank=True, null=True, on_delete=models.CASCADE, related_name='surveyType')
 	
 	class Meta:
@@ -154,8 +154,9 @@ class OriginDestination(models.Model):
 	destinationPlace = models.CharField(max_length=100, null=True, blank=True)
 	fare = models.CharField(max_length=100, null=True, blank=True)
 	travelDistance = models.CharField(max_length=100, null=True, blank=True)
-	travelTime = models.CharField(max_length=100, null=True, blank=True)
-
+	# travelTime = models.CharField(max_length=100, null=True, blank=True)
+	departureTime= models.CharField(max_length=100, null=True, blank=True)
+	arrivalTime= models.CharField(max_length=100, null=True, blank=True)
 
 	class Meta:
 		app_label = "transdb"
