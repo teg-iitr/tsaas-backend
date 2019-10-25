@@ -19,70 +19,68 @@ from .models import (
 
 admin.site.site_header = 'TSaaS Admin Dashboard'
 
-
+@admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
     list_display = ('memberID', 'familyID', 'created_at')
     list_filter = ('gender','monthlyIncome','householdHead')
 
 
+@admin.register(Family)
 class FamilyDBAdmin(admin.ModelAdmin):
     list_display = ('familyID', 'collegeID', 'noOfMembers')
     list_filter = ('collegeID', 'noOfMembers', 'familyIncome', 'homeState', 'nameOfDistrict')
 
 
+@admin.register(SurveyList)
 class SurveyListAdmin(admin.ModelAdmin):
     list_display = ('surveyID', 'surveyType')
     list_filter = ('surveyType',)
 
 
+@admin.register(SurveyType)
 class SurveyTypeAdmin(admin.ModelAdmin):
     list_display = ('surveyTypeID', 'surveyFormat')
     list_filter = ('surveyFormat',)
 
 
+@admin.register(ResponseTime)
 class ResponseTimeAdmin(admin.ModelAdmin):
     list_display = ('responseTimeID', 'surveyID', 'surveyStartTime', 'surveyEndTime')
 
 
+@admin.register(CollegeList)
 class CollegeListAdmin(admin.ModelAdmin):
     list_display = ('collegeID', 'collegeName', 'surveyTypeID')
     list_filter = ('surveyTypeID',)
 
 
+@admin.register(Trip)
 class TripAdmin(admin.ModelAdmin):
     list_display = ('tripID', 'memberID')
 
 
+@admin.register(OriginDestination)
 class ODAdmin(admin.ModelAdmin):
     list_display = ('originDestinationID', 'tripID', 'travelDistance', 'fare')
 
 
+@admin.register(Mode)
 class ModeAdmin(admin.ModelAdmin):
     list_display = ('modeID', 'tripID', 'modeName')
 
 
+@admin.register(Feedback)
 class FeedbackAdmin(admin.ModelAdmin):
     list_display = ('id','feedback_time',)
 
 
+@admin.register(PtSurvey)
 class PtSurveyAdmin(admin.ModelAdmin):
     list_display = ('personID', 'collegeID', 'surveyID')
     list_filter = ('gender', 'monthlyIncome')
 
 
+@admin.register(PtSurveyRating)
 class PtSurveyRatingAdmin(admin.ModelAdmin):
     list_display = ('ptSurveyRatingId', 'personID',)
 
-
-admin.site.register(SurveyList, SurveyListAdmin)
-admin.site.register(SurveyType, SurveyTypeAdmin)
-admin.site.register(ResponseTime, ResponseTimeAdmin)
-admin.site.register(CollegeList, CollegeListAdmin)
-admin.site.register(Family, FamilyDBAdmin)
-admin.site.register(Member, MemberAdmin)
-admin.site.register(Trip, TripAdmin)
-admin.site.register(OriginDestination, ODAdmin)
-admin.site.register(Mode, ModeAdmin)
-admin.site.register(Feedback, FeedbackAdmin)
-admin.site.register(PtSurvey, PtSurveyAdmin)
-admin.site.register(PtSurveyRating, PtSurveyRatingAdmin)
