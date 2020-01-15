@@ -107,15 +107,12 @@ class FamilyViewSet(viewsets.ViewSet):
         return Response(data, status=status.HTTP_201_CREATED)
 
 
-class MemberViewSet(viewsets.ViewSet):
+class MemberViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
+    queryset = Member.objects.all()
+    serializer_class = MemberSerializer
+    http_method_names = ['update', 'create', 'head', 'put', 'patch', 'options','post']
 
-    def create(self, request, *args, **kwargs):
-        serializer = MemberSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class TripViewSet(viewsets.ViewSet):
     permission_classes = [AllowAny]
@@ -171,6 +168,20 @@ class ViewAllViewSet(viewsets.ViewSet):
         queryset = CollegeList.objects.all()
         serializer = ViewAllSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class ViewLast(viewsets.ViewSet):
+    # authentication_classes = [SessionAuthentication, BasicAuthentication]
+
+    # permission_classes = [IsAuthenticated, IsAdminUser]
+    # permission_classes = [AllowAny]
+    permission_classes = [IsAdminUser]
+
+    def list(self, request):
+        queryset = CollegeList.objects.all()[::-1][:1]
+        serializer = ViewAllSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 class PtSurveyViewSet(viewsets.ViewSet):
     permission_classes = [AllowAny]

@@ -115,6 +115,7 @@ class Member(models.Model):
 	dataWhileDriving = models.CharField(max_length=100, blank=True, null=True, verbose_name='Data While Driving')
 	bluetooth = models.CharField(max_length=100, blank=True, null=True, verbose_name='Bluetooth')
 	wifi = models.CharField(max_length=100, blank=True, null=True, verbose_name='WiFi')
+	district = models.CharField(max_length=100, blank=True, null=True, verbose_name='District')
 
 	class Meta:
 		app_label = "transdb"

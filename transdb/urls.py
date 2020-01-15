@@ -16,6 +16,7 @@ from .api import (
     PtSurveyViewSet,
     PtSurveyRatingViewSet,
     ViewResponseTimeViewSet,
+    ViewLast,
     )
 
 router = routers.DefaultRouter()
@@ -45,6 +46,8 @@ router.register('mode', ModeViewSet,'mode' )
 router.register('feedback', FeedbackViewSet,'feedback' )
 
 router.register('all', ViewAllViewSet,'all' )
+
+router.register('last', ViewLast,'last' )
 
 
 # PT Survey

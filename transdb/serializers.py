@@ -145,7 +145,8 @@ class MemberTripSerializer(serializers.ModelSerializer):
             'dataWhileDriving',
             'bluetooth',
             'wifi',
-            'trips'
+            'trips',
+            'district'
         )
 
 
