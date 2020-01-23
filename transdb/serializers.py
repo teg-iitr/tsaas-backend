@@ -7,6 +7,7 @@ from transdb.models import (
     Mode,
     CollegeList,
     Feedback,
+    MemberDistrict,
     SurveyList,
     ResponseTime,
     SurveyType,
@@ -52,6 +53,11 @@ class MemberSerializer(serializers.ModelSerializer):
 class TripSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trip
+        fields = '__all__'
+
+class MemberDistrictSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MemberDistrict
         fields = '__all__'
 
 class OriginDestinationSerializer(serializers.ModelSerializer):

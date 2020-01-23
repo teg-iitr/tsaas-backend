@@ -4,6 +4,7 @@ from rest_framework import routers
 from .api import (
     FamilyViewSet,
     MemberViewSet,
+    MemberDistrictViewSet,
     TripViewSet,
     OriginDestinationViewSet,
     ModeViewSet,
@@ -36,6 +37,8 @@ router.register('college', CollegeListViewSet,'college' )
 router.register('family', FamilyViewSet,'family' )
 
 router.register('members', MemberViewSet,'member' )
+
+router.register('member-district', MemberDistrictViewSet,'member-district' )
 
 router.register('trips', TripViewSet,'trip' )
 

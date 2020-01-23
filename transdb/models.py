@@ -142,6 +142,20 @@ class Trip(models.Model):
 		app_label = "transdb"
 		verbose_name_plural = "Trips"
 
+
+class MemberDistrict(models.Model):
+	memberDistrictId = models.AutoField(primary_key=True, verbose_name='Member District ID')
+	memberDistrict = models.CharField(max_length=100, null=True, blank=True, verbose_name='Member District')
+	memberID = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='Districts', verbose_name='Member ID')
+
+	def __str__(self):
+		return str(self.memberDistrict)
+
+	class Meta:
+		app_label = "transdb"
+		verbose_name_plural = "MemberDistricts"
+
+
 class OriginDestination(models.Model):
 	tripID = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='origin_destination', verbose_name='Trip ID')
 	originDestinationID = models.AutoField(primary_key=True, verbose_name='Origin Destination ID')

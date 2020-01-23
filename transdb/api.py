@@ -6,6 +6,7 @@ from transdb.models import (
     Mode,
     CollegeList,
     Feedback,
+    MemberDistrict,
     SurveyList,
     ResponseTime,
     SurveyType,
@@ -22,6 +23,7 @@ from .serializers import (
     ViewAllSerializer,
     CollegeListSerializer,
     FeedbackSerializer,
+    MemberDistrictSerializer,
     SurveyListSerializer,
     ResponseTimeSerializer,
     TypeSerialiazer,
@@ -112,6 +114,17 @@ class MemberViewSet(viewsets.ModelViewSet):
     queryset = Member.objects.all()
     serializer_class = MemberSerializer
     http_method_names = ['update', 'create', 'head', 'put', 'patch', 'options','post']
+
+
+class MemberDistrictViewSet(viewsets.ViewSet):
+    permission_classes = [AllowAny]
+
+    def create(self, request, *args, **kwargs):
+        serializer = MemberDistrictSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class TripViewSet(viewsets.ViewSet):

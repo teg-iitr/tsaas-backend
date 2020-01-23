@@ -6,6 +6,7 @@ from .models import (
     Member,
     Trip,
     OriginDestination,
+    MemberDistrict,
     Mode,
     CollegeList,
     Feedback,
@@ -46,6 +47,12 @@ class SurveyTypeAdmin(admin.ModelAdmin):
 @admin.register(ResponseTime)
 class ResponseTimeAdmin(admin.ModelAdmin):
     list_display = ('responseTimeID', 'surveyID', 'surveyStartTime', 'surveyEndTime')
+
+
+@admin.register(MemberDistrict)
+class MemberDistrictAdmin(admin.ModelAdmin):
+    list_display = ('memberDistrictId','memberID','memberDistrict')
+    list_filter = ('memberDistrict',)
 
 
 @admin.register(CollegeList)
