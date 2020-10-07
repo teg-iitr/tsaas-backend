@@ -11,7 +11,8 @@ from transdb.models import (
     ResponseTime,
     SurveyType,
     PtSurvey,
-    PtSurveyRating
+    PtSurveyRating,
+    AQIPerceptionSurvey
     )
 from rest_framework import viewsets, permissions, status
 from .serializers import (
@@ -28,7 +29,8 @@ from .serializers import (
     ResponseTimeSerializer,
     TypeSerialiazer,
     PtSurveySerializer,
-    PtSurveyRatingSerializer
+    PtSurveyRatingSerializer,
+    AQIPerceptionSurveySerializer
     )
 from rest_framework.response import Response
 # from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -216,13 +218,7 @@ class PtSurveyRatingViewSet(viewsets.ModelViewSet):
     queryset = PtSurveyRating.objects.all()
     serializer_class = PtSurveyRatingSerializer
     http_method_names = ['update', 'create', 'head', 'options','post']
-    # def create(self, request, *args, **kwargs):
-    #     serializer = PtSurveyRatingSerializer(data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(data, status=status.HTTP_201_CREATED)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+    
 class ViewResponseTimeViewSet(viewsets.ViewSet):
 
     permission_classes = [IsAdminUser]
@@ -231,3 +227,18 @@ class ViewResponseTimeViewSet(viewsets.ViewSet):
         queryset = ResponseTime.objects.all()
         serializer = ResponseTimeSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class AQIPerceptionSurveyViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
+    
+    def create(self, request, *args, **kwargs):
+        try:
+            memberID = AQIPerceptionSurvey.objects.all().last().memberID+1
+        except:
+            memberID = 1
+        data = {'memberID':memberID}
+        serializer = AQIPerceptionSurveySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

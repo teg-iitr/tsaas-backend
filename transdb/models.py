@@ -287,3 +287,19 @@ class PtSurveyRating(models.Model):
 	class Meta:
 		app_label = "transdb"
 		verbose_name_plural = "PtSurveyRatings"
+
+class AQIPerceptionSurvey(models.Model):
+	surveyID = models.ForeignKey(SurveyList, blank=True, null=True, on_delete=models.CASCADE, related_name='AQI perception survey ID', verbose_name='Survey ID')
+	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE, related_name='AQI perception survey group ID/ college ID', verbose_name='College ID')
+	memberID = models.AutoField(primary_key=True, verbose_name='Member/ respondent ID')
+	created_at = models.DateTimeField(default=timezone.now, verbose_name='Created Time')
+	
+	gender = models.CharField(max_length=100, null=True, blank=True, verbose_name='Gender')
+	age = models.CharField(max_length=100, null=True, blank=True, verbose_name='Age')
+	educationalQualification = models.CharField(max_length=100, null=True, blank=True, verbose_name='Educational Qualifications')
+	monthlyIncome = models.CharField(max_length=100, null=True, blank=True, verbose_name='Monthly Income')
+	maritialStatus = models.CharField(max_length=100, null=True, blank=True, verbose_name='Marital Status')
+
+	class Meta:
+		app_label = "transdb"
+		verbose_name_plural = "AQIPerceptionSurveyResponses"

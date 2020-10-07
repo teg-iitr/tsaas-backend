@@ -12,7 +12,8 @@ from transdb.models import (
     ResponseTime,
     SurveyType,
     PtSurvey,
-    PtSurveyRating
+    PtSurveyRating,
+    AQIPerceptionSurvey
     )
 
 from django.db.models import Q
@@ -191,3 +192,8 @@ class ViewAllSerializer(serializers.ModelSerializer):
             # 'surveyID'
             'families'
             )
+
+class AQIPerceptionSurveySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AQIPerceptionSurvey
+        fields = '__all__'

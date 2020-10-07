@@ -14,7 +14,8 @@ from .models import (
     ResponseTime,
     SurveyType,
     PtSurvey,
-    PtSurveyRating
+    PtSurveyRating,
+    AQIPerceptionSurvey
     )
 
 
@@ -90,4 +91,10 @@ class PtSurveyAdmin(admin.ModelAdmin):
 @admin.register(PtSurveyRating)
 class PtSurveyRatingAdmin(admin.ModelAdmin):
     list_display = ('ptSurveyRatingId', 'personID',)
+
+
+@admin.register(AQIPerceptionSurvey)
+class AQIPerceptionSurveyAdmin(admin.ModelAdmin):
+    list_display = ('memberID', 'gender', 'age')
+    
 
