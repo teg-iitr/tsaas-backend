@@ -152,7 +152,7 @@ class MemberTripSerializer(serializers.ModelSerializer):
             'bluetooth',
             'wifi',
             'trips',
-            'district'
+            # 'district'
         )
 
 
@@ -162,7 +162,9 @@ class FamilyMemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Family
         fields = (
+            'surveyID',
             'familyID',
+            # 'surveyID'
             'noOfMembers',
             'noOfCars',
             'noOfCycles',
@@ -186,5 +188,6 @@ class ViewAllSerializer(serializers.ModelSerializer):
         fields = (
             'collegeURL',
             'collegeName',
+            # 'surveyID'
             'families'
             )
