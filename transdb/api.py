@@ -230,15 +230,18 @@ class ViewResponseTimeViewSet(viewsets.ViewSet):
 
 class AQIPerceptionSurveyViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
-    
-    def create(self, request, *args, **kwargs):
-        try:
-            memberID = AQIPerceptionSurvey.objects.all().last().memberID+1
-        except:
-            memberID = 1
-        data = {'memberID':memberID}
-        serializer = AQIPerceptionSurveySerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    queryset = AQIPerceptionSurvey.objects.all()
+    serializer_class = AQIPerceptionSurveySerializer
+    http_method_names = ['update', 'create', 'head', 'put', 'patch', 'options','post']
+
+    # def create(self, request, *args, **kwargs):
+    #     try:
+    #         memberID = AQIPerceptionSurvey.objects.all().last().memberID+1
+    #     except:
+    #         memberID = 1
+    #     data = {'memberID':memberID}
+    #     serializer = AQIPerceptionSurveySerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

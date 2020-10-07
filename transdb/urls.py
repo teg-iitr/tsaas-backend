@@ -66,7 +66,7 @@ router.register('viewSurveyResponseTime', ViewResponseTimeViewSet,'viewSurveyRes
 
 # AQI Perception Survey
 
-router.register('aQIPerceptionSurveyViewSet', AQIPerceptionSurveyViewSet, 'AQIPerceptionSurveyViewSet' )
+router.register('aqips', AQIPerceptionSurveyViewSet, 'aqiPerceptionSurvey' )
 
 urlpatterns = router.urls
 
