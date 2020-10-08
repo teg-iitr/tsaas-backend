@@ -293,12 +293,21 @@ class AQIPerceptionSurvey(models.Model):
 	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE, related_name='aqiPerception_Surveys', verbose_name='College ID')
 	memberID = models.AutoField(primary_key=True, verbose_name='Member or respondent ID')
 	created_at = models.DateTimeField(default=timezone.now, verbose_name='Created Time')
-	
-	gender = models.CharField(max_length=100, null=True, blank=True, verbose_name='Gender')
+	airPollutionMajorProb = models.CharField(max_length=100, null=True, blank=True, verbose_name='Air Pollution Major Iusse in locality')
+	airPollutionAdverseHealthEffect = models.CharField(max_length=100, null=True, blank=True, verbose_name='Air Pollution Adverse Health Effect')
+	aqiUnderstanding = models.CharField(max_length=100, null=True, blank=True, verbose_name='AQI Understanding')
+	UnderstandAbove = models.CharField(max_length=100, null=True, blank=True, verbose_name='Understanding given example')
+	airQualityLevelBad = models.CharField(max_length=100, null=True, blank=True, verbose_name='AQI perception')
+	checkingAirQualityLevel = models.CharField(max_length=100, null=True, blank=True, verbose_name='AQI Source')
+	fequentlyAirQualityLevel = models.CharField(max_length=100, null=True, blank=True, verbose_name='AQI Chcek Frequency')
+	tripsPerDay = models.CharField(max_length=100, null=True, blank=True, verbose_name='Trips per day')
 	age = models.CharField(max_length=100, null=True, blank=True, verbose_name='Age')
+	gender = models.CharField(max_length=100, null=True, blank=True, verbose_name='Gender')
 	educationalQualification = models.CharField(max_length=100, null=True, blank=True, verbose_name='Educational Qualifications')
 	monthlyIncome = models.CharField(max_length=100, null=True, blank=True, verbose_name='Monthly Income')
 	maritialStatus = models.CharField(max_length=100, null=True, blank=True, verbose_name='Marital Status')
+	profession = models.CharField(max_length=100, null=True, blank=True, verbose_name='Profession')
+	comment = models.CharField(max_length=200, null=True, blank=True, verbose_name='Comment')
 
 	class Meta:
 		app_label = "transdb"
