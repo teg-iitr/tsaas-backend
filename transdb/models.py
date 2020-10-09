@@ -293,6 +293,7 @@ class AQIPerceptionSurvey(models.Model):
 	collegeID = models.ForeignKey(CollegeList, blank=True, null=True, on_delete=models.CASCADE, related_name='aqiPerception_Surveys', verbose_name='College ID')
 	memberID = models.AutoField(primary_key=True, verbose_name='Member or respondent ID')
 	created_at = models.DateTimeField(default=timezone.now, verbose_name='Created Time')
+	# Part A
 	airPollutionMajorProb = models.CharField(max_length=100, null=True, blank=True, verbose_name='Air Pollution Major Iusse in locality')
 	airPollutionAdverseHealthEffect = models.CharField(max_length=100, null=True, blank=True, verbose_name='Air Pollution Adverse Health Effect')
 	aqiUnderstanding = models.CharField(max_length=100, null=True, blank=True, verbose_name='AQI Understanding')
@@ -300,7 +301,33 @@ class AQIPerceptionSurvey(models.Model):
 	airQualityLevelBad = models.CharField(max_length=100, null=True, blank=True, verbose_name='AQI perception')
 	checkingAirQualityLevel = models.CharField(max_length=100, null=True, blank=True, verbose_name='AQI Source')
 	fequentlyAirQualityLevel = models.CharField(max_length=100, null=True, blank=True, verbose_name='AQI Chcek Frequency')
+	# Part B
 	tripsPerDay = models.CharField(max_length=100, null=True, blank=True, verbose_name='Trips per day')
+	purposeTrip = models.CharField(max_length=100, null=True, blank=True, verbose_name='Trip purpose')
+	primaryTrip = models.CharField(max_length=100, null=True, blank=True, verbose_name='Travel mode for primary trip')
+	secondaryTrip = models.CharField(max_length=100, null=True, blank=True, verbose_name='Travel mode for secondary trip')
+	avoidTrip = models.CharField(max_length=100, null=True, blank=True, verbose_name='avoid trip due to Air Poll')
+	changeInChoice = models.CharField(max_length=100, null=True, blank=True, verbose_name='Impact on choice due to air quality')
+	choiceInWinter = models.CharField(max_length=100, null=True, blank=True, verbose_name='Choice in winter')
+	changeInActivity = models.CharField(max_length=100, null=True, blank=True, verbose_name='avoid the secondary activities')
+	# Part C
+	informationRequired = models.CharField(max_length=100, null=True, blank=True, verbose_name='need of information')
+	avoidWalk = models.CharField(max_length=100, null=True, blank=True, verbose_name='avoid walk in air poll')
+	preferWFH = models.CharField(max_length=100, null=True, blank=True, verbose_name='prefer WFH in air poll')
+	# Part D
+	perceiveAQIHome = models.CharField(max_length=100, null=True, blank=True, verbose_name='AQI at home')
+	perceiveAQIWork = models.CharField(max_length=100, null=True, blank=True, verbose_name='AQI at work')
+	healthEffect = models.CharField(max_length=300, null=True, blank=True, verbose_name='Impact on health')
+	familyHealthEffect = models.CharField(max_length=100, null=True, blank=True, verbose_name='Impact on family health')
+	travelHealthEffect = models.CharField(max_length=300, null=True, blank=True, verbose_name='Impact on health while traveling')
+	psychologyEffect = models.CharField(max_length=300, null=True, blank=True, verbose_name='psychological effect')
+	# Part E
+	maskAirPollution = models.CharField(max_length=100, null=True, blank=True, verbose_name='use of mask air poll')
+	airFilter = models.CharField(max_length=100, null=True, blank=True, verbose_name='use of air filter')
+	missSchool = models.CharField(max_length=100, null=True, blank=True, verbose_name='avoid school due to air poll')
+	# closeWindow = models.CharField(max_length=100, null=True, blank=True, verbose_name='keeping windows closed')
+	outdoorActivity = models.CharField(max_length=100, null=True, blank=True, verbose_name='no outdoor activites')
+	# Part F
 	age = models.CharField(max_length=100, null=True, blank=True, verbose_name='Age')
 	gender = models.CharField(max_length=100, null=True, blank=True, verbose_name='Gender')
 	educationalQualification = models.CharField(max_length=100, null=True, blank=True, verbose_name='Educational Qualifications')
