@@ -18,7 +18,8 @@ from .api import (
     PtSurveyRatingViewSet,
     ViewResponseTimeViewSet,
     ViewLast,
-    AQIPerceptionSurveyViewSet
+    AQIPerceptionSurveyViewSet,
+    ViewAQIPerceptionSurveyViewSet
     )
 
 router = routers.DefaultRouter()
@@ -67,7 +68,6 @@ router.register('viewSurveyResponseTime', ViewResponseTimeViewSet,'viewSurveyRes
 # AQI Perception Survey
 
 router.register('aqips', AQIPerceptionSurveyViewSet, 'aqiPerceptionSurvey' )
+router.register('viewAQIPSResponses', ViewAQIPerceptionSurveyViewSet, 'viewAQIPSResponses' )
 
 urlpatterns = router.urls
-
-

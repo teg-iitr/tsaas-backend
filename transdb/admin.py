@@ -96,5 +96,6 @@ class PtSurveyRatingAdmin(admin.ModelAdmin):
 @admin.register(AQIPerceptionSurvey)
 class AQIPerceptionSurveyAdmin(admin.ModelAdmin):
     list_display = ('memberID', 'gender', 'age')
+    list_filter = ('homeTehsil', 'destinationTehsil')
     
 

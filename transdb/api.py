@@ -245,3 +245,12 @@ class AQIPerceptionSurveyViewSet(viewsets.ModelViewSet):
     #         serializer.save()
     #         return Response(data, status=status.HTTP_201_CREATED)
     #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ViewAQIPerceptionSurveyViewSet(viewsets.ViewSet):
+
+    permission_classes = [IsAdminUser]
+
+    def list(self, request):
+        queryset = AQIPerceptionSurvey.objects.all()
+        serializer = AQIPerceptionSurveySerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
