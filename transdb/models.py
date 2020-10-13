@@ -295,6 +295,7 @@ class AQIPerceptionSurvey(models.Model):
 	created_at = models.DateTimeField(default=timezone.now, verbose_name='Created Time')
 	# Part A
 	homeTehsil = models.CharField(max_length=100, null=True, blank=True, verbose_name='Home or origin Tehsil')
+	existingHealthConditions = models.CharField(max_length=100, null=True, blank=True, verbose_name='Any existing health issues')
 	airPollutionMajorProb = models.CharField(max_length=100, null=True, blank=True, verbose_name='Air Pollution Major Iusse in locality')
 	airPollutionAdverseHealthEffect = models.CharField(max_length=100, null=True, blank=True, verbose_name='Air Pollution Adverse Health Effect')
 	aqiUnderstanding = models.CharField(max_length=100, null=True, blank=True, verbose_name='AQI Understanding')
@@ -305,6 +306,8 @@ class AQIPerceptionSurvey(models.Model):
 	# Part B
 	destinationTehsil = models.CharField(max_length=100, null=True, blank=True, verbose_name='Destination Tehsil')
 	tripsPerDay = models.CharField(max_length=100, null=True, blank=True, verbose_name='Trips per day')
+	averageTripLengthPrimary = models.CharField(max_length=100, null=True, blank=True, verbose_name='Average trip length primary trips')
+	averageTripLengthSecondary = models.CharField(max_length=100, null=True, blank=True, verbose_name='Average trip length secondary trips')
 	purposeTrip = models.CharField(max_length=100, null=True, blank=True, verbose_name='Trip purpose')
 	primaryTrip = models.CharField(max_length=100, null=True, blank=True, verbose_name='Travel mode for primary trip')
 	secondaryTrip = models.CharField(max_length=100, null=True, blank=True, verbose_name='Travel mode for secondary trip')
@@ -339,6 +342,9 @@ class AQIPerceptionSurvey(models.Model):
 	age = models.CharField(max_length=100, null=True, blank=True, verbose_name='Age')
 	gender = models.CharField(max_length=100, null=True, blank=True, verbose_name='Gender')
 	educationalQualification = models.CharField(max_length=100, null=True, blank=True, verbose_name='Educational Qualifications')
+	noOfCars = models.IntegerField(default=0, verbose_name='No. of Cars')
+	noOfTwoWheelers = models.IntegerField(default=0, verbose_name='No. of Two Wheelers')
+	noOfCycles = models.IntegerField(default=0, verbose_name='No. of Cycles')
 	monthlyIncome = models.CharField(max_length=100, null=True, blank=True, verbose_name='Monthly Income')
 	maritialStatus = models.CharField(max_length=100, null=True, blank=True, verbose_name='Marital Status')
 	profession = models.CharField(max_length=100, null=True, blank=True, verbose_name='Profession')
