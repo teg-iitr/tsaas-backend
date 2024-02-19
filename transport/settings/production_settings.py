@@ -40,7 +40,7 @@ DEBUG = True
 
 # ---> ENTER THE ADDRESS OF THE HOST/DOMAIN NAME THAT DJANGO SHOULD SERVE
 #        (e.g. 'www.example.com') '*' WILL ALLOW ANYONE TO MAKE A GET/POST REQUEST
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['10.19.0.100','http://tsaas.iitr.ac.in']
 
 
 # Application definition
@@ -150,7 +150,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)
