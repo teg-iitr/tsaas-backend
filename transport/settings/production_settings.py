@@ -36,11 +36,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'gpmb%%4(+856tru7qgq8-$8!v-*)t&_zt=s%&zx2vphrh##9s-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ---> ENTER THE ADDRESS OF THE HOST/DOMAIN NAME THAT DJANGO SHOULD SERVE
 #        (e.g. 'www.example.com') '*' WILL ALLOW ANYONE TO MAKE A GET/POST REQUEST
-ALLOWED_HOSTS = ['10.19.0.100','http://tsaas.iitr.ac.in']
+ALLOWED_HOSTS = ['10.19.0.100','http://tsaas.iitr.ac.in','https://tsaas.iitr.ac.in']
 
 
 # Application definition
@@ -158,6 +158,7 @@ USE_L10N = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static/')
+
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
