@@ -15,22 +15,25 @@ from .models import (
     SurveyType,
     PtSurvey,
     PtSurveyRating,
-    AQIPerceptionSurvey
-    )
+    AQIPerceptionSurvey,
+    TableWillingnessSurveyDetails
+)
 
 
 admin.site.site_header = 'TSaaS Admin Dashboard'
 
+
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
     list_display = ('memberID', 'familyID', 'created_at')
-    list_filter = ('gender','monthlyIncome','householdHead')
+    list_filter = ('gender', 'monthlyIncome', 'householdHead')
 
 
 @admin.register(Family)
 class FamilyDBAdmin(admin.ModelAdmin):
     list_display = ('familyID', 'collegeID', 'noOfMembers')
-    list_filter = ('collegeID', 'noOfMembers', 'familyIncome', 'homeState', 'nameOfDistrict')
+    list_filter = ('collegeID', 'noOfMembers', 'familyIncome',
+                   'homeState', 'nameOfDistrict')
 
 
 @admin.register(SurveyList)
@@ -47,12 +50,13 @@ class SurveyTypeAdmin(admin.ModelAdmin):
 
 @admin.register(ResponseTime)
 class ResponseTimeAdmin(admin.ModelAdmin):
-    list_display = ('responseTimeID', 'surveyID', 'surveyStartTime', 'surveyEndTime')
+    list_display = ('responseTimeID', 'surveyID',
+                    'surveyStartTime', 'surveyEndTime')
 
 
 @admin.register(MemberDistrict)
 class MemberDistrictAdmin(admin.ModelAdmin):
-    list_display = ('memberDistrictId','memberID','memberDistrict')
+    list_display = ('memberDistrictId', 'memberID', 'memberDistrict')
     list_filter = ('memberDistrict',)
 
 
@@ -79,7 +83,7 @@ class ModeAdmin(admin.ModelAdmin):
 
 @admin.register(Feedback)
 class FeedbackAdmin(admin.ModelAdmin):
-    list_display = ('id','feedback_time',)
+    list_display = ('id', 'feedback_time',)
 
 
 @admin.register(PtSurvey)
@@ -97,5 +101,16 @@ class PtSurveyRatingAdmin(admin.ModelAdmin):
 class AQIPerceptionSurveyAdmin(admin.ModelAdmin):
     list_display = ('memberID', 'gender', 'age')
     list_filter = ('homeTehsil', 'destinationTehsil')
-    
 
+
+# @admin.register(TableUnwilligness)
+# class TableUnwillignessAdmin(admin.ModelAdmin):
+#     list_display = ('PurposeOfDailyTrip', 'SameTravelMode', 'TimeOfBoarding')
+#     # list_filter = ('homeTehsil', 'destinationTehsil')
+
+
+class TableUnwillingnessAdmin(admin.ModelAdmin):
+    exclude = ('id',)
+
+
+admin.site.register(TableWillingnessSurveyDetails, TableUnwillingnessAdmin)
