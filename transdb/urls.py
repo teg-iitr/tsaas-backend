@@ -5,6 +5,7 @@ from .api import (
     FamilyViewSet,
     MemberViewSet,
     MemberDistrictViewSet,
+    ReadCsvFile,
     TripViewSet,
     OriginDestinationViewSet,
     ModeViewSet,
@@ -18,56 +19,80 @@ from .api import (
     PtSurveyRatingViewSet,
     ViewResponseTimeViewSet,
     ViewLast,
+    SurveyTypeViewFetchData,
     AQIPerceptionSurveyViewSet,
-    ViewAQIPerceptionSurveyViewSet
-    )
+    ViewAQIPerceptionSurveyViewSet, SurveyTypeViewSettest, TableWillingnessViewSet,
+    ReadIndoreCsv,
+    MatchedPlace,
+    ReadWillingnessData
+)
+
 
 router = routers.DefaultRouter()
 
+
+# for willingness survey
+router.register('willingnessdata', ReadWillingnessData, 'willingnessdata')
+router.register('indorecsv', ReadIndoreCsv, 'indorecsv')
+router.register('place', MatchedPlace, 'place')
 # common to all survey
 
-router.register('survey', SurveyListViewSet,'survey' )
+router.register('data', SurveyTypeViewFetchData, 'data')
 
-router.register('responseTime', ResponseTimeViewSet,'surveyResponseTime' )
+router.register('test', SurveyTypeViewSettest, 'test')
 
-router.register('surveyType', SurveyTypeViewSet,'type' )
+router.register('survey', SurveyListViewSet, 'survey')
 
-router.register('college', CollegeListViewSet,'college' )
+router.register('responseTime', ResponseTimeViewSet, 'surveyResponseTime')
+
+router.register('surveyType', SurveyTypeViewSet, 'type')
+
+router.register('college', CollegeListViewSet, 'college')
 
 # Household survey
 
-router.register('family', FamilyViewSet,'family' )
+router.register('family', FamilyViewSet, 'family')
 
-router.register('members', MemberViewSet,'member' )
+router.register('members', MemberViewSet, 'member')
 
-router.register('member-district', MemberDistrictViewSet,'member-district' )
+router.register('member-district', MemberDistrictViewSet, 'member-district')
 
-router.register('trips', TripViewSet,'trip' )
+router.register('trips', TripViewSet, 'trip')
 
-router.register('od', OriginDestinationViewSet,'originDestination' )
+router.register('od', OriginDestinationViewSet, 'originDestination')
 
-router.register('mode', ModeViewSet,'mode' )
+router.register('mode', ModeViewSet, 'mode')
 
-router.register('feedback', FeedbackViewSet,'feedback' )
+router.register('feedback', FeedbackViewSet, 'feedback')
 
-router.register('all', ViewAllViewSet,'all' )
+router.register('all', ViewAllViewSet, 'all')
 
-router.register('last', ViewLast,'last' )
+router.register('last', ViewLast, 'last')
 
 
 # PT Survey
 
-router.register('ptSurvey', PtSurveyViewSet,'ptSurvey' )
-router.register('ptSurveyRating', PtSurveyRatingViewSet,'ptSurveyRating' )
+router.register('ptSurvey', PtSurveyViewSet, 'ptSurvey')
+router.register('ptSurveyRating', PtSurveyRatingViewSet, 'ptSurveyRating')
 
 
 # Survey Response Time
 
-router.register('viewSurveyResponseTime', ViewResponseTimeViewSet,'viewSurveyResponseTime' )
+router.register('viewSurveyResponseTime',
+                ViewResponseTimeViewSet, 'viewSurveyResponseTime')
 
 # AQI Perception Survey
 
-router.register('aqips', AQIPerceptionSurveyViewSet, 'aqiPerceptionSurvey' )
-router.register('viewAQIPSResponses', ViewAQIPerceptionSurveyViewSet, 'viewAQIPSResponses' )
+
+router.register('read', ReadCsvFile, 'read')
+
+router.register('aqips', AQIPerceptionSurveyViewSet, 'aqiPerceptionSurvey')
+router.register('viewAQIPSResponses',
+                ViewAQIPerceptionSurveyViewSet, 'viewAQIPSResponses')
+
+
+# willingnessSurvey
+router.register('TableWillingnessSurveyDetails',
+                TableWillingnessViewSet, 'TableWillingnessSurveyDetails')
 
 urlpatterns = router.urls

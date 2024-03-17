@@ -13,78 +13,114 @@ from transdb.models import (
     SurveyType,
     PtSurvey,
     PtSurveyRating,
-    AQIPerceptionSurvey
-    )
+    AQIPerceptionSurvey,
+    TabletravelDetalis,
+    TableWillingnessSurveyDetails,
+    IndoreStopsList
+
+)
 
 from django.db.models import Q
 from django.contrib.auth import get_user_model
 
 # For converting JSON data to models
 
+
+class IndoreStopsListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IndoreStopsList
+        fields = '__all__'
+
+
+class TableWillingnessSurveyDetails(serializers.ModelSerializer):
+    class Meta:
+        model = TableWillingnessSurveyDetails
+        fields = '__all__'
+
+
+class TabletravelDetalisSerialiazer(serializers.ModelSerializer):
+    class Meta:
+        model = TabletravelDetalis
+        fields = '__all__'
+
+
 class TypeSerialiazer(serializers.ModelSerializer):
     class Meta:
         model = SurveyType
         fields = '__all__'
+
 
 class SurveyListSerializer(serializers.ModelSerializer):
     class Meta:
         model = SurveyList
         fields = '__all__'
 
+
 class ResponseTimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ResponseTime
         fields = '__all__'
+
 
 class CollegeListSerializer(serializers.ModelSerializer):
     class Meta:
         model = CollegeList
         fields = '__all__'
 
+
 class FamilySerializer(serializers.ModelSerializer):
     class Meta:
         model = Family
         fields = '__all__'
+
 
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = '__all__'
 
+
 class TripSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trip
         fields = '__all__'
+
 
 class MemberDistrictSerializer(serializers.ModelSerializer):
     class Meta:
         model = MemberDistrict
         fields = '__all__'
 
+
 class OriginDestinationSerializer(serializers.ModelSerializer):
     class Meta:
         model = OriginDestination
         fields = '__all__'
+
 
 class ModeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mode
         fields = '__all__'
 
+
 class FeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feedback
         fields = '__all__'
+
 
 class PtSurveySerializer(serializers.ModelSerializer):
     class Meta:
         model = PtSurvey
         fields = '__all__'
 
+
 class PtSurveyRatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = PtSurveyRating
-        fields ='__all__'
+        fields = '__all__'
+
 
 class TripModeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -94,6 +130,7 @@ class TripModeSerializer(serializers.ModelSerializer):
             'modeName',
             'modeIndex',
         )
+
 
 class TripODSerializer(serializers.ModelSerializer):
     class Meta:
@@ -114,6 +151,7 @@ class TripODSerializer(serializers.ModelSerializer):
             'departureTime',
             'arrivalTime'
         )
+
 
 class TripODModeSerializer(serializers.ModelSerializer):
     origin_destination = TripODSerializer(many=True)
@@ -158,7 +196,7 @@ class MemberTripSerializer(serializers.ModelSerializer):
 
 
 class FamilyMemberSerializer(serializers.ModelSerializer):
-    members = MemberTripSerializer(many = True)
+    members = MemberTripSerializer(many=True)
 
     class Meta:
         model = Family
@@ -180,9 +218,9 @@ class FamilyMemberSerializer(serializers.ModelSerializer):
             'members',
         )
 
+
 class ViewAllSerializer(serializers.ModelSerializer):
     families = FamilyMemberSerializer(many=True)
-
 
     class Meta:
         model = CollegeList
@@ -191,7 +229,8 @@ class ViewAllSerializer(serializers.ModelSerializer):
             'collegeName',
             # 'surveyID'
             'families'
-            )
+        )
+
 
 class AQIPerceptionSurveySerializer(serializers.ModelSerializer):
     class Meta:

@@ -20,9 +20,9 @@ We have written some instructions on how to do this.
 Look for comments starting with --->
 """
 
-import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -40,7 +40,8 @@ DEBUG = True
 
 # ---> ENTER THE ADDRESS OF THE HOST/DOMAIN NAME THAT DJANGO SHOULD SERVE
 #        (e.g. 'www.example.com') '*' WILL ALLOW ANYONE TO MAKE A GET/POST REQUEST
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['10.19.0.100',
+                 'http://tsaas.iitr.ac.in', 'https://tsaas.iitr.ac.in']
 
 
 # Application definition
@@ -94,15 +95,16 @@ WSGI_APPLICATION = 'transport.wsgi.application'
 
 
 # ---> WE ARE USING POSTGRES AS RECOMMENDED BY DJANGO.
-#      
+#
 DATABASES = {
     'default': {
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'name_of_database', # ---> REPLACE THIS WITH THE NAME OF YOUR OWN DATABASE
-	'USER': 'dummy_username', # ---> REPLACE THIS WITH THE USERNAME YOU CREATE IN PSQL
-	'PASSWORD': 'dummy_password', # ---> REPLACE THIS WITH THE PASSWORD YOU CREATE IN PSQL
-	'HOST': 'localhost',
-	'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'name_of_database',  # ---> REPLACE THIS WITH THE NAME OF YOUR OWN DATABASE
+        'USER': 'dummy_username',  # ---> REPLACE THIS WITH THE USERNAME YOU CREATE IN PSQL
+        # ---> REPLACE THIS WITH THE PASSWORD YOU CREATE IN PSQL
+        'PASSWORD': 'dummy_password',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -157,7 +159,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR,'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
